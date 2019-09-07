@@ -1,0 +1,25 @@
+---
+chapter: "samples"
+author: "Daniel Kaplan"
+date: 2018-12-13 
+version: 0.1
+topics: [selection bias, NYC bus delays, third]
+depends: cheetah-lose-saucer
+id: elm-keep-plate 
+---
+
+```{r elm-keep-plate-default, include = FALSE}
+```
+
+TITLE GOES HERE: Recall back to (ref:cheetah-loose-saucer) where the number of students carried on New York City school busses was shown. Your friend, noticing that most of the busses are carrying five or fewer students, complains about the waste of resources, the unnecessary emission of CO_2_, increased traffic, and so on.
+
+Explain to your friend why the number of students carried by busses that break down isn't necessarily representative of the number of student passengers in busses that never made it into the "bus delays" dataset. -A- The busses were, presumably, stopped in mid-route and may not have picked up some of the regularly scheduled riders (or, on the way home, may have already dropped some students off).
+
+
+```{r elm-keep-plate-1, echo = FALSE}
+
+```
+
+```{r elm-keep-plate-2, echo = FALSE}
+
+```

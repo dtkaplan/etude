@@ -1,0 +1,41 @@
+#' Make a new etude exercise
+#'
+#' Creates the boilerplate for an etude exercise.
+#' Typically, this will be called by the RStudio addin, but
+#' you can also run it directly when `save=TRUE`
+#'
+#' @param save Logical indicating whether to save the template to a new file
+#' and return the name of that file
+#' @param exercise_id Root name for the exercise file (.Rmd will be added).
+#' By default, a random, unique root name will be created using the `etude` naming
+#' convention, e.g., bear-walk-dish
+#'
+#' @export
+new_etude_template <- function(save = TRUE, exercise_id = NULL) {
+  if (is.null(exercise_id))  exercise_id <- make_random_id()
+  count = 0
+  while (count < 10 && save && file.exists(paste0(exercise_id, ".Rmd"))) {
+    exercise_id <- make_random_id()
+    count = count + 1
+  }
+  if (count >= 10) stop("Can't find a random name for the new etude. Use exercise_id argument to make one of your own.")
+
+
+  contents <- readLines(system.file("etude_template_1.Rmd",
+                                    package = "etude"))
+  contents <- gsub("date:", paste("date:", Sys.Date()), contents)
+  contents <- gsub("id:", paste("id:", exercise_id), contents)
+  contents <- gsub("XXAXX", exercise_id, contents)
+  res <- paste(contents,  collapse = "\n")
+  filename <- paste0(exercise_id, ".Rmd")
+  attributes(res) <- list(file_name = filename)
+
+
+  if (save) {
+    writeLines(res,  con = filename)
+    message("Created  new  etude file named", filename)
+    return(filename)
+  } else {
+    return(res)
+  }
+}

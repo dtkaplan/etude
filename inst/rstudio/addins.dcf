@@ -1,0 +1,4 @@
+Name: new_etude
+Description: Create a new etude file following the template
+Binding: new_etude
+Interactive: false

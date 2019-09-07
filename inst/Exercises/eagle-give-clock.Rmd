@@ -1,0 +1,67 @@
+---
+chapter: "stratification"
+author: "Daniel Kaplan"
+date: 2018-12-14 
+version: 0.2
+topics: [joint, UC Berkeley admissions, third]
+id: eagle-give-clock 
+---
+
+(ref:eagle-give-clock) Exercise in file eagle-give-clock
+
+```{r eagle-give-clock-default, include = FALSE}
+library(NHANES)
+library(dplyr)
+library(mosaic)
+library(mosaicData)
+library(ggformula)
+library(SDSdata)
+```
+
+
+TITLE GOES HERE: In 1972, the US Congress approved the Equal Rights Amendment to the US Constitution, intended to guarantee equality under the law for women and men. (The ERA was ratified by 35 of the 50 states, but this was too few for the amendment to become part of the Constitution.
+
+Perhaps in response to the mood of the time, officials at the University of California Berkeley examined the statistics of graduate-school admissions for the Fall 1973 quarter to look for signs of possible discrimination. Data for the six most popular graduate departments is provided in the `SDSdata::UCB_applicants` data frame. Tables A through D show different views of the data
+
+```{r eagle-give-clock-1, echo = FALSE}
+output <- ifelse(knitr::is_latex_output(), "latex", "html")
+mosaic::tally(~ gender | admit, data = UCB_applicants, format = "percent") %>%
+  round(1) %>% 
+  knitr::kable(caption = "Table A", row.names = TRUE, format = output) %>%
+    kableExtra::kable_styling(full_width = FALSE)
+mosaic::tally(~ admit + gender, data = UCB_applicants, format = "percent") %>%
+  round(1) %>% 
+  knitr::kable(caption = "Table B", row.names = TRUE, format = output) %>%
+    kableExtra::kable_styling(full_width = FALSE)
+mosaic::tally(~ admit + gender, data = UCB_applicants) %>%
+  round(1) %>% 
+  knitr::kable(caption = "Table C", row.names = TRUE, format = output) %>%
+    kableExtra::kable_styling(full_width = FALSE)
+mosaic::tally(~ admit | gender, data = UCB_applicants, format = "percent") %>%
+  round(1) %>% t() %>%
+  knitr::kable(caption = "Table D", row.names = TRUE, format = output) %>%
+    kableExtra::kable_styling(full_width = FALSE)
+```
+
+For each of the four tables (which all summarize `UCB_applicants`), say whether the table is in the form of counts or percent, and what variable (if any) is being used to stratify the table.
+
+Table | counts or percent? | stratification variable?
+------|--------------------|------------------------
+A     |                    | 
+B     |                    |
+C     |                    |
+D     |                    |
+
+<!--answer-start-->
+Table A is in percent. One clue to this is that the entries are not integers. But, of course, if thise were not an exercise there should be a caption saying exactly what the table is.
+
+Notice that in Table A, the percentages in the columns add up to 100, both for "admitted" and "rejected". This means that the fraction of males and females is given for the admitted applicants and separately for the rejected applicants. In other words, Table A is stratified by the `admit` variable, with its two levels "admitted" and "rejected". In the "admitted" stratum, 31.7% of the applicants were female. In the "rejected" stratum, 46.1% were admitted. 
+
+Table B is similarly in percent. But here neither the columns or the rows add up to 100. Instead, all four entries together add up to 100. This means that there is no stratification: the entire dataset is being broken up into four separate categories.
+
+Table C is counts. For counts, it makes no sense to talk about stratification. Table C is very closely related to Table B. Divide the counts in table C by the total number of applicants (`r nrow(UCB_applicants)` and you'll get table B.
+
+Table D is in percent. Note that the rows add up to 100. There is one row for women and one for men. The data is being stratified by sex. Among the women, 30.4% were accepted. In the other stratum, for men, 44.5% were admitted.
+
+<!--answer-end-->
+

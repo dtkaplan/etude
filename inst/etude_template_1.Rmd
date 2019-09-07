@@ -1,0 +1,25 @@
+---
+chapter: "none yet"
+author: "Daniel Kaplan"
+date: 
+version: 0.1
+topics: [first, second, third]
+id: 
+---
+
+(ref:XXAXX) Exercise in file XXAXX
+
+```{r XXAXX-default, include = FALSE}
+SDSdata::sds_setup()
+```
+
+TITLE GOES HERE: Start content here.
+
+
+```{r XXAXX-1, echo = FALSE}
+
+```
+
+```{r XXAXX-2, echo = FALSE}
+
+```

@@ -1,0 +1,25 @@
+---
+chapter: "none yet"
+author: "Daniel Kaplan"
+date: 2019-09-07 
+version: 0.1
+topics: [first, second, third]
+id: goldfish-bet-plate 
+---
+
+(ref:goldfish-bet-plate) Exercise in file goldfish-bet-plate
+
+```{r goldfish-bet-plate-default, include = FALSE}
+SDSdata::sds_setup()
+```
+
+TITLE GOES HERE: Start content here.
+
+
+```{r goldfish-bet-plate-1, echo = FALSE}
+
+```
+
+```{r goldfish-bet-plate-2, echo = FALSE}
+
+```

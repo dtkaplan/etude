@@ -1,0 +1,55 @@
+---
+chapter: "model functions"
+author: "Daniel Kaplan"
+date: 2019-03-30 
+version: 0.2
+topics: [bounded vs unbounded, smoking]
+id: dog-drink-ring 
+---
+
+(ref:dog-drink-ring) Exercise in file dog-drink-ring
+
+```{r dog-drink-ring-default, include = FALSE}
+library(NHANES)
+library(dplyr)
+library(mosaic)
+library(mosaicData)
+library(mosaicModel)
+library(ggformula)
+```
+
+TITLE GOES HERE: 
+
+The two graphs below show the same data: whether or a person survived for 20 years after the initial interview in the `Whickham` survey. A value of 1 on the vertical axis means that the person survived, a value of 0 means they didn't. Note that vertical jittering is being used to avoid overplotting. All of the people in the upper band survived and those in the lower band didn't. 
+
+```{r dog-drink-ring-logistic, echo = FALSE, out.width = "50%", fig.show = "hold", fig.cap = "Two simple models of survival versus age and smoking status."}
+W <- Whickham %>% mutate(survive = as.numeric(outcome == "Alive"))
+mod1 <- glm(survive ~ age * smoker, data = W, family = binomial)
+mod2 <-  lm(survive ~ age * smoker, data = W)
+mod_plot(mod1, data = W) %>%
+  gf_lims(y = c(-.1,1.1)) %>%
+  gf_refine(scale_y_continuous(breaks=c(0,.2,.4,.6,.8,1.0))) %>%
+  gf_labs(y = "Probability of survival for 20 years", title = "(a)") %>%
+  gf_jitter(survive ~ age, color = ~ smoker, data = W, 
+            alpha = 0.2, height = 0.1, inherit = FALSE) %>%
+  gf_theme(legend.position="top")
+mod_plot(mod2, data = W) %>%
+  gf_lims(y = c(-.1,1.1)) %>%
+  gf_refine(scale_y_continuous(breaks=c(0,.2,.4,.6,.8,1.0))) %>%
+  gf_labs(y = "Probability of survival for 20 years", title = "(b)") %>%
+  gf_jitter(survive ~ age, color = ~ smoker, data = W, 
+            alpha = 0.2, height = 0.1,
+            inherit = FALSE) %>%
+  gf_theme(legend.position="top")
+```
+
+One of the plots shows an unbounded model of the probability of survival versus age. The other shows a bounded model. 
+
+1. Which graph shows the unbounded model, (a) or (b)? How can you tell? -A- The unbounded model is (b). The model function goes outside the range zero to one. The bounded model is constrained to be always between zero and one.
+2. Which of the models is better suited to represent a *probability* of survival? Explain why? -A- Probabilities must always be between zero and one. Unbounded models can't guarantee that this will be the case.
+3. What does the bounded model have to show about the relationship  between smoking and survival that is not shown in the unbounded model? -A- The bounded model shows middle-aged smokers having a smaller survival probability than non-smokers.  The unbounded model does not show this.
+
+
+
+
+

@@ -1,0 +1,16 @@
+Package: etude
+Type: Package
+Title: Utilities for Handling Textbook Exercises with Knitr
+Version: 0.1.0
+Author: Daniel Kaplan
+Maintainer: Daniel Kaplan <kaplan@macalester.edu>
+Description: Provides a standard format for exercises and utilities for creating new files in that format, organizing them, and including them in knitr documents such as bookdown or blogdown.
+License: All rights reserved.
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown,
+    yaml
+VignetteBuilder: knitr
+RoxygenNote: 6.1.1
