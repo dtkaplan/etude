@@ -1,5 +1,5 @@
-#' Generate a random name for an exercise
-#'
+# Internal functions to Generate a random name for an exercise
+
 animal_words <- c(
   "ant", "aspen", "ash",
   "bear", "bee", "bird", "boy", "beech",

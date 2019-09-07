@@ -1,0 +1,80 @@
+---
+title: "Creating etude exercise files"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Creating etude exercise files}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(etude)
+```
+
+The nicest way to create `etude` package files is to use the "new_etude" RStudio addin. This will be installed when you install the `etude` package itself.
+
+**Use the addin if you can.** If you can't (for instance, you aren't running RStudio), you can call, from the R console, 
+```{r eval=FALSE}
+new_etude_tempate(save = TRUE)
+```
+Then open up the file whose name is returned by the function.
+
+In either event, the new template will look like this:
+
+```{r echo = FALSE}
+contents <- new_etude_template(save = FALSE)
+cat(paste(contents, collapse="\n"))
+```
+
+This vignette explains the organization of the file.
+
+1. Where? When called from the RStudio addin, the new file will be created in an `Exercises/` directory of the present working directory. So, if you are putting the exercise into an R package, your working directory should be set to `inst`.
+2. YAML. The first several lines of the template are YAML. You can change these to suit your own purpose **but do not change the id: value**.
+3. The id value. By default, etude names new files with a simple mnemonic scheme:
+    ```
+    animal_or_plant-verb-everyday_noun.Rmd
+    ```
+    The point of this is to make it easy to keep the name of a file in short-term human memory, while providing a large namespace for the files. (There are approx. 100,000 names available in the scheme. See the help for `new_etude_template()` if this is not enough.)
+    
+    The ID is very important and, typically, you will not want to change it. Why, because ...
+4. Several R chunks have been provided in the file with names keyed to the ID. The purpose of this is to make sure that, when you include many different exercises in a parent document, there will not be a name conflict for the chunks. (There's another mechanism, in the way that exercises are read in to a parent document, that allows you to use the same exercise twice without chunk name conflicts.)
+
+    In the raw template, the chunks are empty. If you don't have any use for an R chunk in your exercise, you can ignore or remove them. If you need  to add more chunks, it's best if you stick to the naming convention that keys the chunk name to the ID.
+5. Just after the YAML, there is a line that looks like
+
+    ```
+    (ref:squirrel-beat-jacket) Exercise in file squirrel-beat-jacket
+    ```
+    
+    **Do not edit this line**. At the point where etude inserts the exercise into a parent document, this line will be automatically revised to either (1) provide a bookdown/pandoc style reference by which you can refer to the exercise in other places in your document or (2) deleted entirely. 
+    
+    QUESTION IN DRAFT: How to signal to etude whether the situation is (1) or (2)?
+6. The problem title. In the template, the title is always the same:
+    ```
+    TITLE GOES HERE:
+    ```
+    When etude inserts the exercise into a parent document, this placeholder will be replaced with the actual title of the problem as specified by the parent document. So leave `TITLE GOES HERE:` alone.
+7. The `Start content here` tells you where you can begin adding the content to the file. You should delete `Start content here.` and put in your own content, using properly named R chunks as needed.
+    By starting your own content on the same line as `TITLE GOES HERE`, you enable etude to put the title "in-line" in the final document. Of course, in the parent document, you can specify with a string like `"Problem 4.3:\n\n"` that you *want* there to be a blank line after the title, if indeed you  do.
+    
+## Providing answers
+
+You write answers in the exercise document itself. In order to enable etude to redact the answers, you need to mark the answer material appropriately. There are two ways to do this:
+
+1. Anything following `-A-` to the end of the line will be treated as an answer. It's the end of the line as defined by the character content in the file that matters; it doesn't matter how your editor chooses to display very wide text as multiple lines. If using the default editor in RStudio, each logical line is numbered. Any content following `-A-` on the same logical line will be answer material.
+2. Enclose arbitrary text, perhaps spanning multiple lines and including R-chunks, in the HTML comments 
+
+    `<!--start-answer-->` and `<!--end-answer-->`
+    
+These should always come in start/end pairs. You can have as many pairs as you like.
+
+    
+
+

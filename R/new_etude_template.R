@@ -33,7 +33,7 @@ new_etude_template <- function(save = TRUE, exercise_id = NULL) {
 
   if (save) {
     writeLines(res,  con = filename)
-    message("Created  new  etude file named", filename)
+    message("Created  new  etude file named ", filename)
     return(filename)
   } else {
     return(res)
