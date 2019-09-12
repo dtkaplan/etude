@@ -129,9 +129,9 @@ etude_xform <- function(id, show_answer = getOption("show_exercise", TRUE),
 }
 
 kill_answer_block <- function(str) {
-  starts <- grep("<\\!\\-\\- *answer\\-start *\\-\\->", str)
+  starts <- grep("<\\!\\-\\- *(answer\\-start|begin\\-answer) *\\-\\->", str)
   if (length(starts) == 0) return(str)
-  ends <- grep("<\\!\\-\\- *answer\\-end *\\-\\->", str)
+  ends <- grep("<\\!\\-\\- *(answer\\-end|end\\-answer) *\\-\\->", str)
   if (length(starts) != length(ends) || any(starts >= ends))
     stop("Unmatched answer-block delimiter.")
   line_numbers <- integer(0)
