@@ -103,7 +103,7 @@ Chap_2_exercises <- tribble(
   "elm-keep-plate", "**Exercise 2.2**",
   "dog-drink-ring", "**Exercise 2.3**"
 ) %>% mutate(
-  answers = FALSE,
+  answers = TRUE,
   documentation = FALSE,
   # Use your own exercise-containing package instead.
   # For stand-alone files, use whatever you want.

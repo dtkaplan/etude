@@ -60,8 +60,8 @@ etude_xform <- function(id, show_answer = getOption("show_exercise", TRUE),
   }
   # replace the answer markup with the appropriate latex/html constructs.
   inline_pattern <- "-A-([[:space:]]*)(.*)"
-  answer_start_pattern <- "<\\!\\-\\-answer\\-start\\-\\->"
-  answer_end_pattern <- "<\\!\\-\\-answer\\-end\\-\\->"
+  answer_start_pattern <- "<\\!\\-\\-(answer\\-start|begin\\-answer)\\-\\->"
+  answer_end_pattern <- "<\\!\\-\\-(answer\\-end|end\\-answer)\\-\\->"
   # Fill in the problem name.
   content <- gsub("(\\(ref:.*\\)) Exercise in file .*$",
                   paste("\\1", prob_name),
@@ -93,15 +93,14 @@ etude_xform <- function(id, show_answer = getOption("show_exercise", TRUE),
                     "BLOCK-ANSWER-END",
                     content)
   }  else if (format == "html") {
-    content <- gsub("-A-([[:space:]]*)(.*)$",
-                    "<span class = 'answer-fragment'> \\2 </span>",
+    content <- gsub("-A-([[:space:]]*)(.*)[$|\\n]",
+                    "<span class = 'answer-fragment'> \\2 </span>\n",
                     content, perl = TRUE)
     content <- gsub(answer_start_pattern,
                     "<div class='answer-fragment'>",
-                    content, fixed = TRUE)
+                    content)
 
-    content <- gsub(answer_end_pattern, "</div>", content,
-                    fixed = TRUE)
+    content <- gsub(answer_end_pattern, "</div>", content)
   } else {
     stop("Unknown output format for problem file.")
   }

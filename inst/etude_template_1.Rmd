@@ -3,7 +3,7 @@ chapter: "none yet"
 author: "Daniel Kaplan"
 date: 
 version: 0.1
-topics: [first, second, third]
+tags: [first, second, third]
 id: 
 ---
 
