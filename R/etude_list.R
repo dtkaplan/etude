@@ -33,6 +33,7 @@ etude_list <- function(spec, keep_ref = FALSE) {
                   verbose = this$documentation, prob_name = this$name,
                   package = this$package, keep_ref = FALSE)
     writeLines(Lines, con = "~/Downloads/foo.Rmd")
+
     contents <- knitr::knit_child("~/Downloads/foo.Rmd")
 
     Res <- paste(Res, "\n", contents)
