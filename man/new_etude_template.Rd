@@ -4,7 +4,7 @@
 \alias{new_etude_template}
 \title{Make a new etude exercise}
 \usage{
-new_etude_template(save = TRUE, exercise_id = NULL)
+new_etude_template(save = TRUE, exercise_id = NULL, learnr = FALSE)
 }
 \arguments{
 \item{save}{Logical indicating whether to save the template to a new file
@@ -13,6 +13,9 @@ and return the name of that file}
 \item{exercise_id}{Root name for the exercise file (.Rmd will be added).
 By default, a random, unique root name will be created using the `etude` naming
 convention, e.g., bear-walk-dish}
+
+\item{learnr}{Logical flag (default: FALSE) whether to use
+a learnr compatible document for the exercise.}
 }
 \description{
 Creates the boilerplate for an etude exercise.

@@ -1,0 +1,76 @@
+---
+chapter: "none yet"
+author: "XXAUTHORXX"
+output: learnr::tutorial
+tutorial:
+  id: "XXAXX"
+  version: 0.1
+runtime: shiny_prerendered
+date: 
+tags: [first, second, third]
+id: 
+---
+
+(ref:XXAXX) Exercise in file XXAXX
+
+```{r XXAXX-default, include = FALSE}
+SDSdata::sds_setup()
+library(learnr)
+```
+
+TITLE GOES HERE: ^^ Start content at the mark.
+
+
+```{r XXAXX-1, echo = FALSE}
+
+```
+
+```{r XXAXX-box-setup}
+# Your setup code here.
+```
+
+```{r XXAXX-box, exercise=TRUE, exercise.setup="XXAXX-box-setup", exercise.cap="Code box", exercise.eval=FALSE, exercise.lines=2, exercise.completion=FALSE, exercise.startover=TRUE, exercise.diagnostics=FALSE }
+# Your reader-scaffolding code here
+```
+
+<!-- For an HTML formatted hint, remove the 
+     comment punctuation in the next HTML <div>. -->
+<!--div id="XXAXX-box-hint">
+A HTML-formatted hint can go here.
+</div-->
+
+<!-- Alternatively, you can have code hints.
+     Remove "-inactive" in the chunk label
+     to activate any of the following learnr chunks.-->
+```{r XXAXX-box-hint-1-inactive}
+# First code hint can go here
+```
+
+
+
+```{r XXAXX-box-check-inactive, echo = FALSE}
+# Checking code goes here.
+# set eval to TRUE
+```
+
+```{r XXAXX-box-code-check-inactive, echo = FALSE}
+# Code checking prior to execution of code
+# set eval to TRUE
+```
+
+
+```{r XXAXX-box-solution-inactive, echo = FALSE}
+# Solution code not yet provided
+```
+
+Perhaps you want to have a multiple-choice question. Here's a template. Remember that there are different formats: `question_text`, `question_checkbox`, `question_radio`
+```{r XXAXX-Q1, echo=FALSE}
+question(
+  text = "The prompt for the question",
+  answer("First choice", correct = TRUE, message = "The first one is *always* correct."),
+  answer("Second choice", message = "The second choice is *never* correct."),
+  answer("Third choice", correct = TRUE, message = "More than one answer can be true."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE)
+```
+

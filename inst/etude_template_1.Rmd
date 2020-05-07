@@ -1,10 +1,10 @@
 ---
 chapter: "none yet"
-author: "Daniel Kaplan"
+author: "XXAUTHORXX"
 date: 
 version: 0.1
 tags: [first, second, third]
-id: 
+id: XXAXX
 ---
 
 (ref:XXAXX) Exercise in file XXAXX
@@ -13,7 +13,7 @@ id:
 SDSdata::sds_setup()
 ```
 
-TITLE GOES HERE: Start content here.
+TITLE GOES HERE: ^^ Start content at the mark.
 
 
 ```{r XXAXX-1, echo = FALSE}

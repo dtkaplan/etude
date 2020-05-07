@@ -4,10 +4,15 @@
 \alias{etude_xform}
 \title{Insert an exercise from a file}
 \usage{
-etude_xform(id, show_answer = getOption("show_exercise", TRUE),
-  verbose = TRUE, keep_ref = FALSE, prob_name = "Problem XX",
-  package = "etude", format = ifelse(knitr::is_latex_output(), "latex",
-  "html"))
+etude_xform(
+  id,
+  show_answer = getOption("show_exercise", TRUE),
+  verbose = TRUE,
+  keep_ref = FALSE,
+  prob_name = "Problem XX",
+  package = "etude",
+  format = ifelse(knitr::is_latex_output(), "latex", "html")
+)
 }
 \arguments{
 \item{id}{the unique ID of the exercise file. Don't include the file type suffix ".Rmd" in the id.}

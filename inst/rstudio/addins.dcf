@@ -1,4 +1,9 @@
 Name: new_etude
 Description: Create a new etude file following the template
 Binding: new_etude
-Interactive: false
+Interactive: true
+
+Name: new_learnr_etude
+Description: Create a new etude set up for learnr code boxes
+Binding: new_etude_learnr
+Interactive: true

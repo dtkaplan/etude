@@ -8,10 +8,12 @@ Description: Provides a standard format for exercises and utilities for creating
 License: All rights reserved.
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    whoami
 Suggests: 
     knitr,
     rmarkdown,
     yaml,
     dplyr
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

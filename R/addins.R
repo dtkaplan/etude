@@ -1,13 +1,19 @@
 #' Addin  to make a new etude exercise
 #'
-new_etude <- function(directory = "Exercises") {
+new_etude_learnr <- function(directory = "Exercises") {
+  new_etude(directory = directory, learnr = TRUE)
+}
+new_etude <- function(directory = "Exercises",
+                      learnr = FALSE) {
   # is there an Exercises directory?
   tmp <- list.dirs(path = directory)
   if (length(tmp) == 0)
     stop("No directory <", directory, "> in which to create the file.")
 
   while (TRUE) {
-    doc_contents <- new_etude_template(save = FALSE)
+    doc_contents <-
+      new_etude_template(save = FALSE,
+                         learnr = learnr)
     # will be saved later from editor
     new_file_name <- paste(directory, attr(doc_contents, "file_name"), sep = "/")
     tmp <- list.files(path = new_file_name)

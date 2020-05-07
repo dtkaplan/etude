@@ -28,7 +28,7 @@ read_yaml_head <- function(file) {
     return(list(status = "No YAML"))
   yaml_lines <- 2:(fences[2] - 1)
 
-  Rform <- yaml.load(contents[yaml_lines])
+  Rform <- yaml::yaml.load(contents[yaml_lines])
   names(Rform)[names(Rform) == "topics"] <- "tags"
   Rform$status <- "OK"
   if ("version" %in% names(Rform))
