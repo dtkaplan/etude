@@ -30,4 +30,38 @@ new_etude <- function(directory = "Exercises",
   }
 }
 
+# Addin to insert a question
+#' @export
+insertQ <- function() {
+  this_doc <- rstudioapi::getActiveDocumentContext()
+  contents <- this_doc$contents
+  # figure out the document ID
+  id <- "unknown_document_id"
+  id_line_number <- which(grepl("^id:", contents))
+  if (length(id_line_number) == 1) {
+    id <- gsub(" +", "",
+               gsub("^[id:| )]+(.*)$", "\\1", contents[id_line_number])
+    )
+  } else {
+    stop("Multiple id: lines in YAML header or document.")
+  }
+  # Get the next question number
+  existing_questions <- 0 # if none
+  line_nums <- grep(paste0("^```\\{r +",id, "-Q[0-9]+,"), contents)
+  nums <- regmatches(contents[line_nums],
+                     gregexpr("\\-Q([0-9]+)",
+                              contents[line_nums])
+  )
+  nums <- unlist(nums)
+  nums <- as.numeric(gsub("[^0-9]", "", nums))
+  new_num <- max(c(existing_questions, nums))+1
+  new_question <- readLines(system.file("learnr-question-template.R", package = "etude"))
+  new_question <- gsub("BLOCK_NAME",
+                       paste0(id, "-Q", new_num),
+                       new_question)
+  rstudioapi::insertText(
+    paste(new_question, collapse="\n"),
+    id = this_doc$id)
+}
+
 
