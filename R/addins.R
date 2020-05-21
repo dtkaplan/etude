@@ -84,3 +84,10 @@ new_chunk_id <- function(contents, doc_id, type = "-Q") {
   # form the new chunk ID and return
   paste0(doc_id, type, new_num)
 }
+#' @export
+etudeE <- function() etude::insertQ("-E")
+#' @export
+etudeQ <- function() etude::insertQ("-Q")
+#' @export
+etudeC <- function() etude::insertQ("-C")
+

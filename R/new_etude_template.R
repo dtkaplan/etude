@@ -24,8 +24,8 @@ new_etude_template <- function(save = TRUE,
   if (count >= 10) stop("Can't find a random name for the new etude. Use exercise_id argument to make one of your own.")
 
   template_file <-
-    if (learnr) "etude_learnr_template_1.Rmd"
-    else "etude_template_1.Rmd"
+    if (learnr) "learnr_doc_template.Rmd"
+    else "markdown_template.Rmd"
   contents <- readLines(system.file(template_file,
                                     package = "etude"))
   contents <- gsub("date:", paste("date:", Sys.Date()), contents)
