@@ -32,36 +32,55 @@ new_etude <- function(directory = "Exercises",
 
 # Addin to insert a question
 #' @export
-insertQ <- function() {
+insertQ <- function(type = "-Q") {
   this_doc <- rstudioapi::getActiveDocumentContext()
   contents <- this_doc$contents
   # figure out the document ID
-  id <- "unknown_document_id"
-  id_line_number <- which(grepl("^id:", contents))
-  if (length(id_line_number) == 1) {
-    id <- gsub(" +", "",
-               gsub("^[id:| )]+(.*)$", "\\1", contents[id_line_number])
-    )
-  } else {
-    stop("Multiple id: lines in YAML header or document.")
-  }
+  id <- get_doc_ID(contents)
   # Get the next question number
-  existing_questions <- 0 # if none
-  line_nums <- grep(paste0("^```\\{r +",id, "-Q[0-9]+,"), contents)
-  nums <- regmatches(contents[line_nums],
-                     gregexpr("\\-Q([0-9]+)",
-                              contents[line_nums])
-  )
-  nums <- unlist(nums)
-  nums <- as.numeric(gsub("[^0-9]", "", nums))
-  new_num <- max(c(existing_questions, nums))+1
-  new_question <- readLines(system.file("learnr-question-template.R", package = "etude"))
-  new_question <- gsub("BLOCK_NAME",
-                       paste0(id, "-Q", new_num),
-                       new_question)
+  chunk_id <- new_chunk_id(contents, id, type)
+  template_file <-
+    system.file(glue::glue("template{type}.Rmd"),
+                package = "etude")
+  new_chunk <- readLines(template_file)
+  new_chunk <- gsub("BLOCK_NAME",
+                       chunk_id,
+                       new_chunk, fixed = TRUE)
   rstudioapi::insertText(
-    paste(new_question, collapse="\n"),
+    paste(new_chunk, collapse="\n"),
     id = this_doc$id)
 }
 
+#' Get the id of the document
+get_doc_ID <- function(contents) {
+  id <- paste0("document_", as.hexmode(floor(runif(1, 1, 16^7))))
+  id_line_number <- which(grepl("^id:", contents))
+  if (length(id_line_number) > 0) {
+    id <- gsub(" +", "",
+               gsub("^[id:| )]+(.*)$", "\\1", contents[id_line_number[1]])
+    )
+  }
+  id
+}
 
+new_chunk_id <- function(contents, doc_id, type = "-Q") {
+
+  line_nums <-
+    grep(
+      paste0("^```\\{r +",doc_id,
+             glue::glue("{type}[0-9]+[, \\}]")),
+      contents)
+  if (length(line_nums) > 0) {
+  nums <- regmatches(contents[line_nums],
+                     gregexpr(glue::glue("\\{type}([0-9]+)"),
+                              contents[line_nums]))
+  nums <- unlist(nums)
+  nums <- as.numeric(gsub("[^0-9]", "", nums))
+  new_num <- max(nums)+1
+  } else {
+    new_num <- 1
+  }
+
+  # form the new chunk ID and return
+  paste0(doc_id, type, new_num)
+}

@@ -1,0 +1,21 @@
+<!------------------ Start learnr exercise: BLOCK_NAME -->
+
+```{r BLOCK_NAME-setup}
+# Setup code goes here
+"setup"
+```
+
+```{r BLOCK_NAME, exercise=TRUE, exercise.cap="Sandbox", exercise.setup="BLOCK_NAME-setup", exercise.eval=FALSE, exercise.lines=2, exercise.completion=FALSE, exercise.startover=TRUE, exercise.diagnostics=TRUE}
+"code block"
+```
+
+```{r BLOCK_NAME-solution}
+
+```
+
+```{r BLOCK_NAME-check}
+
+```
+
+<!-------------------- End of learnr exercise: BLOCK_NAME -->
+

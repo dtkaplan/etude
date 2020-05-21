@@ -29,7 +29,6 @@ new_etude_template <- function(save = TRUE,
   contents <- readLines(system.file(template_file,
                                     package = "etude"))
   contents <- gsub("date:", paste("date:", Sys.Date()), contents)
-  contents <- gsub("id:", paste("id:", exercise_id), contents)
   contents <- gsub("XXAXX", exercise_id, contents)
   contents <- gsub("XXAUTHORXX", whoami::fullname(), contents)
   res <- paste(contents,  collapse = "\n")

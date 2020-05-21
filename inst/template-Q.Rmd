@@ -1,0 +1,11 @@
+```{r BLOCK_NAME, echo=FALSE}
+question(
+  text = "prompt",
+  answer("First", correct = TRUE, message = "Nice"),
+  answer("Second", message = "Never"),
+  allow_retry = TRUE,
+  random_answer_order = TRUE)
+```
+
+
+
