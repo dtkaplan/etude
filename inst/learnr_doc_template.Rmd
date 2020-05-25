@@ -14,6 +14,7 @@ id: XXAXX
 
 ```{r XXAXX-setup, include = FALSE}
 SDSdata::sds_setup()
+library(etude)
 library(learnr)
 library(gradethis)
 library(QandA)

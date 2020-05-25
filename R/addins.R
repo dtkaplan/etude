@@ -1,9 +1,11 @@
 #' Addin  to make a new etude exercise
 #'
-new_etude_learnr <- function(directory = "Exercises") {
+#' @export
+new_etude_learnr <- function(directory = ".") {
   new_etude(directory = directory, learnr = TRUE)
 }
-new_etude <- function(directory = "Exercises",
+#' @export
+new_etude <- function(directory = ".",
                       learnr = FALSE) {
   # is there an Exercises directory?
   tmp <- list.dirs(path = directory)
@@ -90,4 +92,10 @@ etudeE <- function() etude::insertQ("-E")
 etudeQ <- function() etude::insertQ("-Q")
 #' @export
 etudeC <- function() etude::insertQ("-C")
+#' @export
+etudeQA <- function() etude::insertQ("-QA")
+#' @export
+etudeQinline <- function() etude::insertQ("-Qinline")
+
+
 

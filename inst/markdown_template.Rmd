@@ -1,0 +1,16 @@
+---
+chapter: "none yet"
+author: "XXAUTHORXX"
+date: 
+version: 0.1
+tags: [first, second, third]
+id: XXAXX
+---
+
+```{r XXAXX-default, include = FALSE}
+library(etude)
+```
+
+<!--Start after closing > --> 
+
+

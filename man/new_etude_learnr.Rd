@@ -4,7 +4,7 @@
 \alias{new_etude_learnr}
 \title{Addin  to make a new etude exercise}
 \usage{
-new_etude_learnr(directory = "Exercises")
+new_etude_learnr(directory = ".")
 }
 \description{
 Addin  to make a new etude exercise

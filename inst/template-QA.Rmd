@@ -1,0 +1,16 @@
+```{r BLOCK_NAME, echo=FALSE}
+# indicate correct choices with +_+ in the name of the list item.
+QandA::choice_list(
+  prompt = "Which of these letters is a vowel?",
+  choices = list(
+    "+A+" = "",
+    "B" = "B's a consonant, Bub.",
+    "C" = "C is a consonant, Chub",
+    "D" = "D is a consonant, Dear",
+    "+E+" = ""
+  )
+)
+```
+
+
+
