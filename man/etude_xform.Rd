@@ -21,9 +21,9 @@ etude_xform(
 
 \item{verbose}{Include the YAML information}
 
-\item{keep_ref}{Logical flag indicating whether to keep the bookdown text reference (that is, `(ref:...)`). Default: FALSE}
+\item{keep_ref}{Logical flag indicating whether to keep the bookdown text reference (that is, \code{(ref:...)}). Default: FALSE}
 
-\item{prob_name}{Character string naming the problem, e.g. `"Prob 1.3"`}
+\item{prob_name}{Character string naming the problem, e.g. \code{"Prob 1.3"}}
 
 \item{package}{character string naming the package from which the problem
 is to be taken}
@@ -32,10 +32,10 @@ is to be taken}
 Each exercise is contained in its own file, with a unique ID. This function
 reads the file for that ID, knits the contents, and returns the knitted contents.
 Typically this will be used to insert the exercise into an Rmd file.
-If not specified, argument `show_answer` will be read from `options("show_answer")`.
+If not specified, argument \code{show_answer} will be read from \code{options("show_answer")}.
 }
 \details{
-When output is in html, use the `answer-fragment` class in CSS to format
+When output is in html, use the \code{answer-fragment} class in CSS to format
 the answers.
 }
 \examples{

@@ -20,16 +20,18 @@ A hook to include exercises in a document
 }
 \details{
 In the startup to the document, set
-`knitr::knit_hooks$set(exercise = exercise_hook)`
+\code{knitr::knit_hooks$set(exercise = exercise_hook)}
 
 You don't call the hook directly. Instead, it is called by knitr
-whenever the chunk option `exercise = <file_hash>` is given.
+whenever the chunk option \verb{exercise = <file_hash>} is given.
 You should communicate using the chunk options, not the ar
 The chunk relevant options are:
-- `exercise=`: hash for exercise file
-- `name=`: the identifier for the exercise to print
-- `answers=`: TRUE or FALSE: show the answers?
-- `package=`: the package the exercise comes from.
+\itemize{
+\item \verb{exercise=}: hash for exercise file
+\item \verb{name=}: the identifier for the exercise to print
+\item \verb{answers=}: TRUE or FALSE: show the answers?
+\item \verb{package=}: the package the exercise comes from.
+}
 }
 \examples{
 \dontrun{

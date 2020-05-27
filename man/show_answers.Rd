@@ -10,18 +10,20 @@ show_answers(
 )
 }
 \arguments{
-\item{flag}{logical. If `TRUE` (default) show the chunks
-marked with the `etude` engine as specially formatted solutions}
+\item{flag}{logical. If \code{TRUE} (default) show the chunks
+marked with the \code{etude} engine as specially formatted solutions}
 
 \item{format}{Whether the document is intended for translation
 to latex or to html. Determined automatically by default.}
 }
 \description{
-Calling `show_answers(TRUE)` causes the etude document
+Calling \code{show_answers(TRUE)} causes the etude document
 to display answers. Answers can be marked in either of two
 ways:
 }
 \details{
-1. a chunk with engine `etude`
-2. an inline chunk calling `ans(your_text)`
+\enumerate{
+\item a chunk with engine \code{etude}
+\item an inline chunk calling \code{ans(your_text)}
+}
 }

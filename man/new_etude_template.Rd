@@ -11,7 +11,7 @@ new_etude_template(save = TRUE, exercise_id = NULL, learnr = FALSE)
 and return the name of that file}
 
 \item{exercise_id}{Root name for the exercise file (.Rmd will be added).
-By default, a random, unique root name will be created using the `etude` naming
+By default, a random, unique root name will be created using the \code{etude} naming
 convention, e.g., bear-walk-dish}
 
 \item{learnr}{Logical flag (default: FALSE) whether to use
@@ -20,5 +20,5 @@ a learnr compatible document for the exercise.}
 \description{
 Creates the boilerplate for an etude exercise.
 Typically, this will be called by the RStudio addin, but
-you can also run it directly when `save=TRUE`
+you can also run it directly when \code{save=TRUE}
 }

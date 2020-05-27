@@ -13,5 +13,5 @@ etude_dir(where)
 Etude files are stored in a directory, typically "Exercises". This  function
 scans through  the RMD files in such  a directory and constructs a data frame
 based  on  the YAML. The data frame can be useful, for instance, for including
-in a parent file using `etude_list()`.
+in a parent file using \code{etude_list()}.
 }
