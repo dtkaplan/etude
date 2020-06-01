@@ -15,6 +15,8 @@
 show_answers <- function(
   flag=TRUE,
   format = ifelse(knitr::is_latex_output(), "latex", "html")) {
+
+  assign("answers_on", flag, show_answers_env)
   if (flag) {
     strings <- get_format_strings(format)
     knitr::knit_engines$set(etude = function(options) {
@@ -27,6 +29,11 @@ show_answers <- function(
   }
 }
 
+# System for determining globally whether the display of
+# answers is on.
+show_answers_env <- new.env()
+show_answers_env$answers_on <- FALSE
+are_answers_on <- function() show_answers_env$answers_on
 
 get_format_strings <- function(format) {
   if (format == "latex") {
