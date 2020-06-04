@@ -28,8 +28,7 @@ learnr::tutorial_options(exercise.timelimit = 60,
                  exercise.checker = QandA::save_check_inputs)
 ```
 
-<!-- Leave the exercise_title() that follows alone.
-     Start the exercise text on the same line. -->
-`r etude::exercise_title()`      Start content here.
+
+`r etude::exercise_title()` Start content here.
 
 

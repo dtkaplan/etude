@@ -4,13 +4,13 @@
 #'
 #' @param fname The path name for the etude `.Rmd` file.
 #' @param title Character string containing the immediate header
-#' for the etude, e.g., `"Problem 17.3:"` or `"#### Exer A\n\n"`
+#' for the etude, e.g., `"Problem 17.3:"` or `"### Exer A\n\n"`
 #'
 #' @export
 include_etude <- function(fname, title) {
   if (missing(title)) {
     warning("Using etude file name as title. See title= argument to include_etude()")
-    title = paste("**Source file:",fname, "**:   ")
+    title = paste("### Source file:",fname,"\n\n")
   }
   assign(".the_title.", title, envir = etude:::title.env)
 

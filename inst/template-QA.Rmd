@@ -1,6 +1,6 @@
 ```{r BLOCK_NAME, echo=FALSE}
 # indicate correct choices with +_+ in the name of the list item.
-QandA::choice_list(
+etude::choose_one(
   prompt = "Which of these letters is a vowel?",
   choices = list(
     "+A+" = "",

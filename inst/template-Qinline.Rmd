@@ -1,8 +1,9 @@
 ```{r BLOCK_NAME, echo=FALSE}
 # indicate correct choices with +_+ in the item.
-QandA::choose_one(
+etude::choose_one(
   prompt = "Which  is a vowel?",
-  c("+A+", "B", "C")
+  c("+A+", "B", "C"),
+  random_answer_order = FALSE
 )
 ```
 

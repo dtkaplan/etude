@@ -7,6 +7,13 @@
 #' 1. a chunk with engine `etude`
 #' 2. an inline chunk calling `ans(your_text)`
 #'
+#' When `show_answers(TRUE)` has been called, the multiple choice questions
+#' created by `true_and_false()` or `choose_one()` will, **if they are
+#' being rendered as static HTML, will show the answers along with each multiple-choice
+#' item. Note that if the document is compiled to `learnr`, those static
+#' answers won't be shown. Instead, it's the user's dynamic interaction
+#' with the `learnr` document that sets whether the user sees answers.
+#'
 #' @param flag logical. If `TRUE` (default) show the chunks
 #' marked with the `etude` engine as specially formatted solutions
 #' @param format Whether the document is intended for translation

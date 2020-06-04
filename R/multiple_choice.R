@@ -12,11 +12,30 @@
 #' @param allow_retry Logical flag to allow multiple submissions
 #' @param random_answer_order Logical flag to shuffle the order
 #' of choices when question is displayed.
-#' @param yes_delim Delimiter for a correct answer. Default `"+"` on either side
-#' of answer, but if there is a plus sign in in the answer, use `"Y"`.
 #' @param is_learnr Is the document being compiled for `learnr`. This is
 #' set automatically. Override it to `FALSE` if you want to see the
 #' question in ordinary markdown format.
+#'
+#' @details
+#' The functions `true_or_false()` and `choose_one()` are intermediaries
+#' to the `learnr::question()` and `learnr::answer()` functions. They
+#' provide a somewhat more concise way of describing the choices and appropriate
+#' feedback and they allow questions to be rendered in an ordinary
+#' Rmarkdown document without requiring the "shiny" elements of a learnr
+#' document.
+#'
+#' When a `etude` file intended to be used with `learnr` is compiled on its
+#' own, it is setup for the `learnr` runtime and questions will render
+#' in learnr format. (Unless you manually override this with the `is_learnr = FALSE` option.)
+#' But when you include an etude file as a child of a mother document, using
+#' the `include_etude()` function typically, the questions will inherit
+#' the settings of that document, which might be an ordinary Rmd document
+#' directed to HTML or PDF or Word, etc.
+#'
+#' Whether answers are displayed in the non-learnr static renderings
+#' depends on the argument `show_answers`. By default, this uses `etude`'s system
+#' for turning on and off answers with the `show_answers(TRUE)` or `show_answers(FALSE)` command
+#' earlier in the document.
 #'
 #' @export
 true_or_false <-
@@ -27,7 +46,7 @@ true_or_false <-
            allow_retry = TRUE,
            show_answers = are_answers_on(),
            is_learnr = "learnr" %in% loadedNamespaces()) {
-    printfun <- if (is_learnr) question_for_learnr else question_for_html
+    printfun <- if (is_learnr) question_for_learnr else question_for_markup
 
     choices <- list(
       ifelse(right_answer, message_right, message_wrong),
@@ -50,36 +69,42 @@ choose_one <- function(prompt = "First consonant?",
                        inline= TRUE,
                        points = NA,
                        show_answers = are_answers_on(),
-                       yes_delim = c("\\+", "Y"), ...,
+                       ...,
                        random_answer_order = TRUE,
                        allow_retry = TRUE,
                        is_learnr = "learnr" %in% loadedNamespaces()) {
-  printfun <- if (is_learnr) question_for_learnr else question_for_html
+
+  if ((is.character(choices) || is.numeric(choices)) &&
+      !is.null(names(choices))) {
+    message("Please give the <choices> as a list() if you are assigning messages to the choices.")
+    choices <- as.list(choices)
+  }
+
+  if (n_correct(choices) == 0) stop("Must provide at least one correct choice.")
+
+  printfun <- if (is_learnr) question_for_learnr else question_for_markup
 
   printfun(prompt = prompt,
            choices = choices,
            inline= inline,
            points = points,
            show_answers = show_answers,
-           yes_delim = yes_delim,
            random_answer_order = random_answer_order,
            allow_retry = allow_retry)
 }
 #'
 #'
-#' @export
-question_for_html <- function(prompt = "What?",
+
+question_for_markup <- function(prompt = "What?",
                           choices = list(a = "No", "+b+" = "Right"),
                           inline= TRUE,
                           points = NA,
                           show_answers = TRUE,
-                          yes_delim = c("\\+", "Y"), ...) {
-  yes_delim <- match.arg(yes_delim)
+                          ...) {
   texts <- names(choices)
   messages <- unlist(choices)
-  correct_ones <-
-    grepl(glue::glue("^{yes_delim}.*{yes_delim}$"), texts)
-  texts <- gsub(glue::glue("^{yes_delim}|{yes_delim}$"), "", texts)
+  correct_ones <- which_are_correct(texts)
+  texts <- clean_names(texts)
 
   res <- paste0("**", prompt, "**     ")
   if (!is.na(points)) res <- paste0(res, "(", points, "points)")
@@ -104,19 +129,31 @@ question_for_html <- function(prompt = "What?",
   knitr::asis_output(ret)
 }
 
-#' @export
 question_for_learnr <- function(prompt = "What?",
                                 choices = list(a = "No, it's not", "+b+" = "Right as rain"),
                                 inline= TRUE,
                                 points = NA,
-                                show_answers = TRUE,
-                                yes_delim = c("\\+", "Y"), ...,
-                                random_answer_order = TRUE,
+                                show_answers = TRUE,                                random_answer_order = TRUE,
                                 allow_retry = TRUE) {
-  yes_delim <- match.arg(yes_delim)
-  correct_ones <-
-    grepl(glue::glue("^{yes_delim}.*{yes_delim}$"), names(choices))
-  names(choices) <- gsub(glue::glue("^{yes_delim}|{yes_delim}$"), "", names(choices))
+
+
+  if (is.character(choices)) {
+    # Convert character vector to a list with empty messages.
+    tmp <- as.list(rep("", length(choices)))
+    names(tmp) <- as.character(choices)
+    choices <- tmp
+  } else if (is.numeric(choices)) {
+    stop("choices argument must be a named list or a character vector.")
+  }
+
+  if (is.null(names(choices))) {
+    # add labels A B C, ... and all are correct
+    warning("choices argument must be a **named** list.")
+    names(choices) <- paste0("+", LETTERS[1:length(choices)], "+")
+  }
+
+  correct_ones <- which_are_correct(choices)
+  names(choices) <- clean_names(choices)
 
   answers <- list()
   for (k in 1:length(choices)) {
@@ -136,11 +173,30 @@ question_for_learnr <- function(prompt = "What?",
 
   arguments <- list(
     text <- prompt,
-    random_answer_order = TRUE,
-    allow_retry = TRUE,
+    random_answer_order = random_answer_order,
+    allow_retry = allow_retry,
     type = qtype
   )
 
   do.call(learnr::question,
           c(arguments, answers))
 }
+
+n_correct <- function(choices) {
+  sum(which_are_correct(choices))
+}
+
+which_are_correct <- function(choices, yes_delim = "\\+") {
+  if (is.list(choices)) choices <- names(choices)
+
+  grepl(glue::glue("^{yes_delim}.*{yes_delim}$"),
+            choices)
+}
+
+clean_names <- function(choices, yes_delim = "\\+") {
+  if (is.list(choices)) choices <- names(choices)
+
+  gsub(glue::glue("^{yes_delim}|{yes_delim}$"), "", choices)
+}
+
+

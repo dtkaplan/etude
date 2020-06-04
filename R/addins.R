@@ -89,9 +89,11 @@ new_chunk_id <- function(contents, doc_id, type = "-Q") {
 #' @export
 etudeE <- function() etude::insertQ("-E")
 #' @export
+etudeS <- function() etude::insertQ("-sandbox")
+#' @export
 etudeQ <- function() etude::insertQ("-Q")
 #' @export
-etudeC <- function() etude::insertQ("-C")
+etudeC <- function() etude::insertQ("-C") # Chunk
 #' @export
 etudeQA <- function() etude::insertQ("-QA")
 #' @export

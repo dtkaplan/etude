@@ -1,0 +1,112 @@
+---
+title: "Tutorial"
+output: learnr::tutorial
+runtime: shiny_prerendered
+id: question_formats
+---
+
+
+## Time to recompile .
+
+```{r setup, include=FALSE}
+library(learnr)
+library(QandA)
+library(ggformula)
+library(gradethis)
+knitr::opts_chunk$set(echo = FALSE)
+learnr::tutorial_options(exercise.timelimit = 60, 
+                 exercise.checker = save_check_inputs)
+```
+
+```{r essay_space}
+essay_response()
+```
+
+```{r exercise_box-setup}
+x  <- 18
+y = "hello"
+```
+
+
+
+```{r exercise_box, exercise=TRUE, exercise.setup="exercise_box-setup"}
+
+```
+
+```{r exercise_box-solution}
+tt <- 323
+```
+
+```{r exercise_box-check,  eval=FALSE, echo=FALSE}
+t <- 177
+grade_result(
+  pass_if(~ identical(.result, 361), "Good job!")
+)
+```
+
+```{r question_formats-Q1, echo=FALSE}
+choose_one(
+  prompt = "What is 2 + 2?",
+  c(1, 2, 3,  "+4+", 5, 6),
+  inline = TRUE
+)
+```
+
+```{r question_formats-Qinline1, echo=FALSE}
+# indicate correct choices with +_+ in the item.
+QandA::choose_one(
+  prompt = "Which  is a vowel?",
+  c("+A+", "B", "C")
+)
+```
+
+```{r test_yesno}
+yesno(
+  prompt = "Is $e^{-i \\pi} = 1$?",
+  istrue = FALSE,
+  right = "Good, you recognized the missing minus sign.",
+  wrong = "Remember, angle $\\pi$ points to  the left side of the plane",
+  points  = 15     
+)
+```
+
+
+
+
+
+```{r test_choices0}
+QandA::choice_list(
+  prompt = "Which of these letters is a vowel?",
+  choices = list(
+    "+A+" = "",
+    "B" = "B's a consonant, Bub.",
+    "C" = "C is a consonant, Chub",
+    "D" = "D is a consonant, Dear",
+    "+E+" = ""
+  )
+)
+```
+
+
+```{r test_choices1}
+QandA::choices(
+  prompt = "What color is not in the rainbow?",
+  good = list("purple" = "Purple is a human perception, not a wavelength of light."),
+  bad = list("red" = "The R in ROY G. BIV",
+              "green" = "It's in the rainbow, for sure",
+              "the color blue" = "What color is the sky?"),
+  points = 10  
+)
+```
+
+```{r test_choices2}
+QandA::choices(
+  prompt = "What colors **are** in the rainbow?",
+  bad = list("purple" = "Purple is a human perception, not a wavelength of light."),
+  good = list("red" = "The R in ROY G. BIV",
+              "green" = "It's in the rainbow, for sure",
+              "the color blue" = "What color is the sky?"),
+  points = 10,
+  need_all = TRUE
+)
+```
