@@ -65,6 +65,14 @@ get_doc_ID <- function(contents) {
   id
 }
 
+clean_acroscore <- function() {
+  context <- rstudioapi::getActiveDocumentContext()
+  where <- rstudioapi::primary_selection(context)
+  rstudioapi::insertText(where$range,
+                         do_clean_acroscore(where$text),
+                         context$id)
+}
+
 new_chunk_id <- function(contents, doc_id, type = "-Q") {
 
   line_nums <-
