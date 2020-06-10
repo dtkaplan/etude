@@ -1,13 +1,13 @@
 #' Addin  to make a new etude exercise
 #'
 #' @export
+#' @rdname new_etude_template
+#' @param directory Path to the directory where the files go
 new_etude_learnr <- function(directory = ".") {
   new_etude(directory = directory, learnr = TRUE)
 }
 #' @export
 #' @rdname new_etude_template
-#' @param directory Path to the directory where the files go
-#' @param learnr logical indicating if the etude uses \code{learnr}
 new_etude <- function(directory = ".",
                       learnr = FALSE) {
   # is there an Exercises directory?

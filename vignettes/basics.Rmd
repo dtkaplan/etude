@@ -2,8 +2,7 @@
 title: "Including  exercises in parent documents"
 output: rmarkdown::html_vignette
 vignette: >
-
-
+  %\VignetteIndexEntry{Basics of using etude}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -11,6 +10,7 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  error = TRUE,
   comment = "#>"
 )
 library(etude)
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Étude works with sets of exercise files, in a specific format detailed in another vignette. This vignette shows how to include such files within another document. That might be, for example, a book written with bookdown, but it can be any file that you knit into a user-facing form. Here, the file doing the including will be this vignette's source, `basics.Rmd`. We will refer to such a document as the "parent" document, and the individual exercises files as the child documents.^[Implementation detail: etude in fact uses `knitr::knit_child()`.] 
+Étude works with sets of exercise files, in a specific format detailed in another vignette. This vignette shows how to include such files within another document. That might be, for example, a book written with **bookdown**, but it can be any file that you knit into a user-facing form. Here, the file doing the including will be this vignette's source, `basics.Rmd`. We will refer to such a document as the "parent" document, and the individual exercises files as the child documents.^[Implementation detail: etude in fact uses `knitr::knit_child()`.] 
 
 We'll start here with the assumption that exercise files in the proper format already exist. I like to put exercise files in a package, which makes them easy to distribute to collaborating authors without revealing the answers embedded in the source file. 
 
@@ -45,15 +45,15 @@ knitr::knit_hooks$set(
 
 An exercise chunk will look like this:
 
-    `r ''````{r exercise="cheetah-hit-plate",name="**Example 1**:", answers=FALSE, documentation=TRUE, package = "etude"}
+    `r ''````{r exercise="cheetah-hit-plate", name="**Example 1**:", answers=FALSE, documentation=TRUE, package = "etude"}
     
     ```
     
-Note that there is nothing contained *in* the chunk. All the information used by etude comes from chunk options. 
+Note that there is nothing contained *in* the chunk. All the information used by **etude** comes from chunk options. 
 
 Here's the result from the above chunk ...
 
-```{r exercise="cheetah-hit-plate",name="**Example 1**:", answers=FALSE, documentation=TRUE, package="etude"}
+```{r exercise="cheetah-hit-plate", name="**Example 1**:", answers=FALSE, documentation=TRUE, package="etude"}
 ```
 
 ----------
@@ -62,9 +62,9 @@ I have placed a horizontal line *after* the exercise using ordinary Markdown *ou
 
 In the chunk including **Example 1** above, the chunk option `documentation=TRUE` was given. This is what causes the bulleted information to appear at the end of the printed exercise. This can be helpful when developing an exercise document or, perhaps, in distributing a catalog of exercises to teachers, but would not usually be something to include in files distributed to students.
 
-As you can guess, setting `documentation=FALSE` suppresses this documentary behavior. Similarly, the chunk option `answers=FALSE` instructs etude not to put answers or such in the printed version. (Answer text can be included in an etude-format file. It's up to the author to write it! Etude doesn't do this.)
+As you can guess, setting `documentation=FALSE` suppresses this documentary behavior. Similarly, the chunk option `answers=FALSE` instructs **etude** not to put answers or such in the printed version. (Answer text can be included in an etude-format file. It's up to the author to write it! **Etude** doesn't do this.)
 
-A useful practice is to set the policy regarding showing documentation and answers in the parent Rmd
+A useful practice is to set the policy regarding showing documentation and answers in the parent `Rmd`
 file's setup chunk, with a statement like this:
 
     knitr::opts_chunk$set(
@@ -75,15 +75,15 @@ file's setup chunk, with a statement like this:
 
 This way, you can easily change the policy globally in the document to serve different purposes. Note that you can override the global settings for any single chunk by setting that chunk's options directly.
 
-Also note that in the above example the exercise file itself is contained in a package; here, the etude package. Doubtless you will have no reason to draw on the few examples in the etude package, so it's important to specify which package you are drawing the exercises from.
+Also note that in the above example the exercise file itself is contained in a package; here, the **etude** package. Doubtless you will have no reason to draw on the few examples in the **etude** package, so it's important to specify which package you are drawing the exercises from.
 
-It's not required that the etude exercise files be organized into a package. You can specify the name explicitly by giving the full file name as the value of `exercise=`. The file name will, presumably, end in `.Rmd`.  In this following, the file path and name are generated using the `system.file()` function (so that the example will work with just the etude package installed), but you can use any file that's accessible on your computer.
+It's not required that the **etude** exercise files be organized into a package. You can specify the name explicitly by giving the full file name as the value of `exercise=`. The file name will, presumably, end in `.Rmd`.  In this following, the file path and name are generated using the `system.file()` function (so that the example will work with just the **etude** package installed), but you can use any file that's accessible on your computer.
 
-    `r ''````{r exercise = system.file("Exercises/dog-drink-ring.Rmd", package = "etude"), name="**Exercise directly from a file**: "}
+    `r ''````{r exercise = system.file("Exercises/cheetah-hit-plate.Rmd", package = "etude"), name="**Exercise directly from a file**: ", eval=FALSE}
     
     ```
 
-```{r exercise = system.file("Exercises/dog-drink-ring.Rmd", package = "etude"), name="**Exercise directly from a file**: "}
+```{r exercise = system.file("Exercises/cheetah-hit-plate.Rmd", package = "etude"), name="**Exercise directly from a file**: ", eval=FALSE}
 ```
 
 --------
@@ -101,7 +101,7 @@ Chap_2_exercises <- tribble(
   ~ exercise, ~ name,
   "eagle-give-clock", "**Exercise 2.1**",
   "elm-keep-plate", "**Exercise 2.2**",
-  "dog-drink-ring", "**Exercise 2.3**"
+#  "dog-drink-ring", "**Exercise 2.3**"
 ) %>% mutate(
   answers = TRUE,
   documentation = FALSE,

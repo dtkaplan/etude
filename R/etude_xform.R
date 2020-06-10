@@ -18,9 +18,10 @@
 #' the answers.
 #'
 #' @examples
+#' \dontrun{
 #' the_testing_dir <- system.file("Test_exercises", package = "SDSdata")
 #' include_exercise("beech-run-mug", directory = the_testing_dir, format = "latex")
-#'
+#' }
 
 #' @export
 etude_xform <- function(id, show_answer = getOption("show_exercise", TRUE),
