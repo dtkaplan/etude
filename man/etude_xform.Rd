@@ -39,7 +39,8 @@ When output is in html, use the \code{answer-fragment} class in CSS to format
 the answers.
 }
 \examples{
+\dontrun{
 the_testing_dir <- system.file("Test_exercises", package = "SDSdata")
 include_exercise("beech-run-mug", directory = the_testing_dir, format = "latex")
-
+}
 }
