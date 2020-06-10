@@ -26,4 +26,11 @@ ways:
 \item a chunk with engine \code{etude}
 \item an inline chunk calling \code{ans(your_text)}
 }
+
+When \code{show_answers(TRUE)} has been called, the multiple choice questions
+created by \code{true_and_false()} or \code{choose_one()} will, **if they are
+being rendered as static HTML, will show the answers along with each multiple-choice
+item. Note that if the document is compiled to \code{learnr}, those static
+answers won't be shown. Instead, it's the user's dynamic interaction
+with the \code{learnr} document that sets whether the user sees answers.
 }

@@ -10,7 +10,7 @@ include_etude(fname, title)
 \item{fname}{The path name for the etude \code{.Rmd} file.}
 
 \item{title}{Character string containing the immediate header
-for the etude, e.g., \code{"Problem 17.3:"} or \code{"#### Exer A\\n\\n"}}
+for the etude, e.g., \code{"Problem 17.3:"} or \code{"### Exer A\\n\\n"}}
 }
 \description{
 Inserts an etude into a mother document

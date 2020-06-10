@@ -48,7 +48,7 @@ etude_xform <- function(id, show_answer = getOption("show_exercise", TRUE),
   } else {
     chunk_id <- yaml_stuff$id
   }
-  new_chunk_id <- paste0(chunk_id, round(runif(1, 100, 100000)))
+  new_chunk_id <- paste0(chunk_id, round(stats::runif(1, 100, 100000)))
   content <- gsub(chunk_id, new_chunk_id, content)
 
 
