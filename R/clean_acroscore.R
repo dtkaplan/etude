@@ -16,6 +16,8 @@ do_clean_acroscore <- function(text) {
   # lines <- clean_names(lines)
   # quote each name
   lines <- paste0('"', lines, '"')
+  # escape tex backslashes
+  lines <- gsub("\\\\", "\\\\\\\\", lines)
 
   blanks <- paste(paste("  ", lines, "=", rep("''", length(lines))), collapse=",\n")
 
