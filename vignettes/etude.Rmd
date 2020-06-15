@@ -1,0 +1,165 @@
+---
+title: "Writing exercises with `{etude}`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{etude}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(etude)
+```
+
+The dictionary defines *étude* as 
+
+> *A short musical composition, typically for one instrument, designed as an exercise to improve the technique or demonstrate the skill of the player.*
+
+The `{etude}` R package provides support for writing collections of *exercises* that can be used flexibly with the various authoring and deployment tools in the R ecosystem. This includes Rmd documents--compiled into either HTML or LaTeX--as well as the `{learnr}` interactive tutorial system. Etude inter-operates with the `{submitr}` system for logging student interaction with exercises as well as the `{checkthis}` system for providing feedback on R statements executed by the student in a `{learnr}` tutorial.
+
+Etude can be helpful in organizing, say, homeworks written for a textbook or a class semester. I wrote it to help keep manageable hundreds of statistics, data science, and calculus exercises which I publish in books (paper as well as online) and distribute to students in an online, interactive form that allows student submissions to be collected as the student is working with the exercises. Typically, each etude file is short, but there is no practical limit (other than good sense) for how much material can be put into one etude.
+
+## An `{etude}` file
+
+An `{etude}` file is a standard RMarkdown file. There is a YAML header to store metadata about the etude--topic, author, date, etc.--and to set parameters for compiling the Rmd file in the usual ways.
+
+Each etude is intended to be compiled as a stand-alone document, so that authors can quickly repeat the usual write-compile-debug cycle without having to worry much about the larger system that the etude will fit in to. The `{etude}` package provides an automatic, consistent naming system that makes organizing large collections straightforward as well as facilities for including *answers* within the etude. The answers can be turned on and off at compile time to support, for instance, using exactly the same etude file in a set of exercises and in a separate answer key for those exercises.
+
+The name for an etude file is, by default, created automatically. Names follow the pattern *organism*-*verb*-*object*.Rmd, for example `"cat-dig-bowl.Rmd"`. This convention takes advantage of the way short-term human memory works.
+
+Answers in an etude file can be put in either of two formats:
+
+- an *inline* statement appropriate for storing short answers, e.g. a word, phrase, or number.
+- a *paragraph* for longer answers stored in an RMarkdown chunk.
+
+Both formats can include *markdown* and LaTeX mathematics markup. The inline form can include inline R calculations. The paragraph form can include RMarkdown chunks that generate graphics, tables, and any of the other things an author might want to include as part of the answer.
+
+## Creating a new etude file
+
+The `{etude}` package includes two RStudio *add-ins* for creating new etudes. One of the addins is to create ordinary Rmd etudes, the other is to create `{learnr}` Rmd files. (An *add-in* is a function that can be invoked from the RStudio graphical user interface *via* the drop-down menu labeled "Addins". Add-ins can also be bound to keyboard shortcuts.)
+
+By default, the addins create etudes in the current working directory of the console, but there is also a command-line version that allows you to specify the directory explicitly. (The directory must have been created previously.) For instance:
+
+```{r new-file, eval=FALSE}
+etude::new_etude("inst/Exercises/")
+```
+
+Note the forward slash that terminates the directory name. This is a reminder that `{etude}` will generate the name of the Rmd file. The file will be opened in the RStudio editor pane and saved automatically. Needless to say, the `new_etude()` function is intended only for interactive use in the R console, and not in an RMarkdown chunk.
+
+Use `new_etude_learnr()` to create an etude configured for `{learnr}`.
+
+## The etude template
+
+The file created by the add-ins (or `new_etude()` or `new_learnr_etude()`) will look like this:
+
+````
+---
+chapter: "none yet"
+author: "Danny Kaplan"
+date: 2020-06-15 
+version: 0.1
+tags: [first, second, third]
+id: walnut-throw-chair
+---
+
+`r ""````{r walnut-throw-chair-default, include = FALSE}
+library(etude)
+`r ""````
+
+`r etude::exercise_title()`      Start content here.
+````
+
+This file was named `"walnut-throw-chair.Rmd"`. The YAML header contains the date and author name (as determined by the `whoami::fullname()` function.) You are encouraged to provide more informative `tags:` for the etude, which can help in finding relevant etudes for a given topic. The `chapter:` field serves the same purpose, the name coming from the original motivation for `{etude}`: writing textbooks.
+
+After the YAML header comes a *set-up* chunk. Add whatever additional lines needed for your exercise, retaining the `library(etude)` line. Note that when etudes are collected into a mother document, each of the set-up chunks will be run at document compile time.
+
+The template ends with "Start content here." You should replace that with the actual beginning of your etude. The inline chunk preceding it, `r etude::exercise_title()` should be left as is. This will allow the mother document to specify the title for each exercise. (See `etude::include_etude()` for more about this.) It's a good practice to keep the actual start of your exercise on the same line as `r etude::exercise_title()`. This practice allows the author of the mother document to choose between inline titles (e.g. **Problem 43.**) or titles that appear as a section heading (e.g. `### Problem 43\n"`).
+
+## Adding `{knitr}` chunks to an etude
+
+The content of your exercise may well include `{knitr}` chunks. It's a recommended practice to *name* all such chunks. This is absolutely *required* for exercise and question chunks in `{learnr}`. The challenge is to come up with a name for the chunk that will be unique throughout the entire *mother* document. For a variety of reasons, it's helpful if the names of chunks in an etude reflect the name of the etude document itself. You can see this in the setup chunk in the above example, which is named `walnut-throw-chair-default`. 
+
+You may, of course, create such chunks by hand. Etude provides a handy tool to do this. Type `etude::etudeC()` at the place you want to insert the chunk, then evaluate the command with command-return. This will insert a properly named chunk numbered in the sequence *etude name*`-C1`, `-C2` and so on. There are analogous commands for inserting code-exercise and question chunks for `{learnr}` documents: `etudeE()` for code-exercises and `etudeS()` for code "sandboxes", `etudeQ()` for `{learnr}`-format questions, `etudeQinline()` for a compact form of `{learnr}` question that can be rendered as markdown and hence suitable for HTML or LaTeX documents.
+
+## `{learnr}` questions
+
+The `etude::choose_one()` function is convenient for creating multiple-choice questions in a more concise format than `learnr::question()`. Since `{learnr}` documents require that questions be in a named chunk, you will likely want to use the `etude::etudeQinline()` shortcut to create a properly named chunk. This also pre-populates the chunk with an example call to `etude::choose_one()`, as follows:
+
+````
+`r ""````{r walnut-throw-chair-Qinline1, echo=FALSE}
+# indicate correct choices with +_+ in the item.
+etude::choose_one(
+  prompt = "Which  is a vowel?",
+  c("+A+", "B", "C"),
+  random_answer_order = FALSE
+)
+```
+````
+
+Correct answers are identified by surrounding the answer with +-signs. (These will not appear in the compiled document unless answer display is turned on.) 
+
+You can add *feedback* for each choice by using `list()` instead of `c()` and assigning the feedback as the value of each choice item, the name of which will be used as the printed value for the choice. For example: 
+
+`list("+A+" = "Good!", "B" = "This is called a *consonant*", "C" = "Try again")`
+
+Note that the list names (e.g. `"+A+"`) are quoted. This allows otherwise illegal characters such as + or space to be included in the name. Even long names are permitted this way.
+
+Sometimes, choices are numeric. Two points here:
+
+- You must put the + choices in quotes, but not the other numbers, e.g. `c(1, 2, "+3", 4, 5)`.
+- Typically with numeric choices you will want to set `random_answer_order = FALSE` so that the choices consistently appear in order.
+
+There is also an argument, `inline = TRUE`, that causes the question to be displayed in a compact form. Set it to `FALSE` if you want to ensure that each choice is presented on its own line.
+
+Note also two other question types provided by `{etude}`:
+
+- `true_or_false()`
+- `essay_response()`
+
+When any of these functions is used in a non-`{learnr}` document, the questions will be rendered as markdown.
+
+```{r results="asis"}
+etude::true_or_false("1. Can you see the sun at night?", FALSE)
+```
+
+```{r results="asis"}
+etude::essay_response("2. Explain why the sky is blue.")
+```
+
+```{r results = "asis"}
+etude::choose_one(
+  prompt = "3. Which  is a vowel?",
+  list("+A+" = "", "B" = "", "C" = ""),
+  random_answer_order = FALSE
+)
+```
+
+## Displaying answers
+
+The function `etude::show_answers(TRUE)` controls whether answers or displayed or not renderings of an etude. By default, answer display is turned off.
+
+During the development phase of an etude, you may want to use `show_answers(TRUE)` in the setup chunk of your etude. But **take it out** when development is complete so that the display of answers can be controlled from the mother document. For someone such as myself, this is a bit error prone. I therefore use `show_answers(TRUE)` only in a *mother* document, debugging answers by reading the mother document and applying the needed changes to the etude child document.
+
+When you have longer-form answers, put them in an `etude` `{knitr}`-engine chunk.
+
+`````
+`r ""`````{etude}
+Long answer here
+````
+`````
+
+Note that I've used *four* backticks so that I can include a regular three-tick R chunk *inside* the answer if I want.
+
+## Organizing etudes as packages
+
+Individual etudes are merely Rmd files, which may be stored in any way that you like. Often, however, you may have a large collection to manage and you may be using them in a collaboration  with  other authors or teachers. Such coordinated management of a collection of files is well accomplished with git and GitHub or other similar software.
+
+I'll go one step beyond this and suggest that an R package can be a way to manage and share etudes. The individual Rmd files are stored in the `inst` package directory (and sub-directories of this) and can be accessed with the R `system.file()` command. It's a good idea to refer to static image files (as opposed to those generated by R) *within* the etudes using `system.file()`. There can be a little confusion due to the need to rebuild the package before compiling the etudes, but the author is reminded of this when images fail to appear.
+

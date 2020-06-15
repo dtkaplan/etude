@@ -7,7 +7,9 @@ new_etude_learnr <- function(directory = ".") {
 #' @export
 new_etude <- function(directory = ".",
                       learnr = FALSE) {
-  # is there an Exercises directory?
+  # Does the directory exist
+  if (!(grepl("/$", directory) || directory == "." || directory == ".."))
+    stop("Directory name must terminate in a forward slash /.")
   tmp <- list.dirs(path = directory)
   if (length(tmp) == 0)
     stop("No directory <", directory, "> in which to create the file.")
