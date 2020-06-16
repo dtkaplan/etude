@@ -1,0 +1,12 @@
+"time","id","session_id","event","tutorial","comment","val1","val2","val3"
+"Tue Jun 16 16:53:36 2020","January kaplan","9137387296","question_submission","ant-feel-magnet-Qinline1 ant-feel-magnet 0.1","question","C ::: FALSE","Which  is a vowel?","label::question::answer::correct"
+"Tue Jun 16 16:53:41 2020","January kaplan","9137387296","question_submission","ant-feel-magnet-Qinline1 ant-feel-magnet 0.1","question","reset","Which  is a vowel?","label::question::reset"
+"Tue Jun 16 16:53:43 2020","January kaplan","9137387296","question_submission","ant-feel-magnet-Qinline1 ant-feel-magnet 0.1","question","A ::: TRUE","Which  is a vowel?","label::question::answer::correct"
+"Tue Jun 16 16:53:46 2020","January kaplan","9137387296","question_submission","ant-feel-magnet-Qinline2 ant-feel-magnet 0.1","question","ל ::: FALSE","Which  is a vowel?","label::question::answer::correct"
+"Tue Jun 16 16:53:55 2020","January kaplan","9137387296","exercise_submitted","ant-feel-magnet-E1 ant-feel-magnet 0.1","code","\"code block\"
+
+","NA","label::id::code::restore"
+"Tue Jun 16 16:53:55 2020","January kaplan","9137387296","exercise_result","ant-feel-magnet-E1 ant-feel-magnet 0.1","code","\"code block\"
+
+","FALSE ::: ","label::id::code::output::timeout_exceeded::time_elapsed::error_message::checked::feedback"
+"Tue Jun 16 16:53:58 2020","January kaplan","9137387296","session_stop","NA ant-feel-magnet 0.1","handled field","","NA",""
