@@ -17,9 +17,25 @@ SDSdata::sds_setup()
 library(etude)
 library(learnr)
 library(gradethis)
+library(submitr)
+library(basket)
 
 learnr::tutorial_options(exercise.timelimit = 60, 
                  exercise.checker = gradethis::grade_learnr)
+```
+
+```{r}
+submitr::login_controls()
+```
+
+```{r context="server", echo = FALSE}
+options(tutorial.storage = "none")
+vfun <- basket::check_valid
+  #submitr::make_basic_validator(NULL, "hello")
+storage_actions <- submitr::record_gs4("1w3fEld2rZlR_6FuzvkA-viOLBA5JdqD3xHl-LuLX3-Y", "statprep.annie@gmail.com", vfun)
+  # submitr::record_local("./minimal_submissions.csv")
+submitr::shiny_logic(input, output, session, vfun,
+                     storage_actions)
 ```
 
 
@@ -32,7 +48,6 @@ To insert a question chunk into an etude, it's handy to use the `etude::etudeQin
 etude::etudeQinline()
 
 ```{r ant-feel-magnet-Qinline1, echo = TRUE}
-# indicate correct choices with +_+ in the item.
 etude::choose_one(
   prompt = "Which  is a vowel?",
   c("+A+", "B", "C"),
@@ -43,7 +58,6 @@ etude::choose_one(
 It's an effective pedagogical practice to provide formative feedback for each choice. Use `list()`  rather than `c()` for this.
 
 ```{r ant-feel-magnet-Qinline2, echo=TRUE}
-# indicate correct choices with +_+ in the item.
 etude::choose_one(
   prompt = "Which  is a vowel?",
   list("+A+" = "The other vowels are E, I, O, U, and sometimes Y.", 

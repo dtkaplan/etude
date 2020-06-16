@@ -135,7 +135,8 @@ question_for_learnr <- function(prompt = "What?",
                                 choices = list(a = "No, it's not", "+b+" = "Right as rain"),
                                 inline= TRUE,
                                 points = NA,
-                                show_answers = TRUE,                                random_answer_order = TRUE,
+                                show_answers = TRUE,
+                                random_answer_order = TRUE,
                                 allow_retry = TRUE) {
 
 
@@ -180,7 +181,7 @@ question_for_learnr <- function(prompt = "What?",
     type = qtype
   )
 
-  do.call(learnr::question,
+  do.call(learnr::question, #etude::etude_question, #
           c(arguments, answers))
 }
 
