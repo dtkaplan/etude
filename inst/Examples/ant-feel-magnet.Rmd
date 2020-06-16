@@ -1,0 +1,113 @@
+---
+chapter: "A simple `{learnr}` demo"
+title: "Title for ant-feel-magnet"
+author: "Danny Kaplan"
+output: learnr::tutorial
+tutorial:
+  id: "ant-feel-magnet"
+  version: 0.1
+runtime: shiny_prerendered
+date: 2020-06-16 
+tags: [first, second, third]
+id: ant-feel-magnet
+---
+
+```{r ant-feel-magnet-setup, include = FALSE}
+SDSdata::sds_setup()
+library(etude)
+library(learnr)
+library(gradethis)
+
+learnr::tutorial_options(exercise.timelimit = 60, 
+                 exercise.checker = gradethis::grade_learnr)
+```
+
+
+`r etude::exercise_title()` Learnr documents consist of narrative and *named* code chunks that contain multiple choice or essay *questions* and active computer code *exercises*. When written for `{learnr}`, each etude is a stand-alone `{learnr}` document that can be run on its own or compiled (using `include_etude()` into a mother document).
+
+## Question
+
+To insert a question chunk into an etude, it's handy to use the `etude::etudeQinline()` function. Just type it in plain text at the point  you want the exercise to appear (as below). Highlight the text, then evaluate the highlighted text with cmd-enter. This will replace the text with the chunk. But in the following, I didn't highlight the text line and so the text remained so you can see it.
+
+etude::etudeQinline()
+
+```{r ant-feel-magnet-Qinline1, echo = TRUE}
+# indicate correct choices with +_+ in the item.
+etude::choose_one(
+  prompt = "Which  is a vowel?",
+  c("+A+", "B", "C"),
+  random_answer_order = FALSE
+)
+```
+
+It's an effective pedagogical practice to provide formative feedback for each choice. Use `list()`  rather than `c()` for this.
+
+```{r ant-feel-magnet-Qinline2, echo=TRUE}
+# indicate correct choices with +_+ in the item.
+etude::choose_one(
+  prompt = "Which  is a vowel?",
+  list("+A+" = "The other vowels are E, I, O, U, and sometimes Y.", 
+       "B" = "This is a consonant, not a vowel", 
+       "ל" = "We're restricting things to the English alphabet. In any event, this Hebrew letter is not a vowel. It corresponds to the sound \"L\"."),
+  random_answer_order = FALSE
+)
+```
+
+
+
+
+## Exercise
+
+Inserting an exercise is much the same as inserting a question, but use `etude::etudeE()` as the trigger. Four chunks will be created:
+
+1. `-setup`: A setup chunk for the exercise
+2. The chunk which is translated to the code block itself
+3. `-solution`: A solution chunk
+4. `-check`: A check chunk where you can place instructions for the code checker.
+
+You can delete (1), (3), and (4) if they are not needed for your purpose. Add `-hint-1`, `-hint-2` chunks, if you need them, by hand. Make sure to keep the names coordinated with the other chunks that form the exercise.
+
+etude::etudeE()
+
+<!------------------ Start learnr exercise: ant-feel-magnet-E1 -->
+
+```{r ant-feel-magnet-E1-setup}
+# Setup code goes here
+"setup"
+```
+
+```{r ant-feel-magnet-E1, exercise=TRUE, exercise.cap="Sandbox", exercise.setup="ant-feel-magnet-E1-setup", exercise.eval=FALSE, exercise.lines=2, exercise.completion=FALSE, exercise.startover=TRUE, exercise.diagnostics=TRUE}
+"code block"
+```
+
+```{r ant-feel-magnet-E1-solution}
+
+```
+
+```{r ant-feel-magnet-E1-check}
+
+```
+
+```{r ant-feel-magnet-E1-hint-1}
+"I added this by hand."
+```
+
+```{r ant-feel-magnet-E1-hint-2}
+"And this one, too!"
+```
+
+Formatted text hints can be added using HTML markup with the appropriate `id`.
+
+```
+<div id="ant-feel-magnet-E1-hint">
+**Hint:** You can add *text* hints but enclosing them in a `<div>` with the appropriate name. But this will cause any chunk hints to be ignored.
+</div>
+```
+
+<!-------------------- End of learnr exercise: ant-feel-magnet-E1 -->
+
+
+
+
+
+
