@@ -4,14 +4,19 @@
 #' Essay box
 #' @export
 essay_response <- function(
-  prompt = "Your answer here ..."
+  prompt = "Your answer here ...",
+  is_learnr = "learnr" %in% loadedNamespaces()
 ) {
+  if (is_learnr) {
   question(text = prompt,
            answer("", correct=TRUE),
            allow_retry = TRUE,
            incorrect = "Message received!",
            type = "text_block",
            try_again_button = "Do you want to re-edit?")
+  } else {
+    knitr::asis_output(paste(prompt, "**Essay answer.**"))
+  }
 }
 
 

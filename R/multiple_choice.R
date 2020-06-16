@@ -37,6 +37,7 @@
 #' for turning on and off answers with the `show_answers(TRUE)` or `show_answers(FALSE)` command
 #' earlier in the document.
 #'
+#' @rdname  true_or_false
 #' @export
 true_or_false <-
   function(prompt, right_answer,
@@ -62,7 +63,8 @@ true_or_false <-
              random_answer_order = FALSE,
              show_answers = show_answers)
   }
-
+#' @aliases choose_one
+#' @rdname  true_or_false
 #' @export
 choose_one <- function(prompt = "First consonant?",
                        choices = list(a = "No, it's not", "+b+" = "Right as rain"),

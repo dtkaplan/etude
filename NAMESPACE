@@ -2,6 +2,7 @@
 
 export(ans)
 export(choose_one)
+export(do_clean_acroscore)
 export(essay_response)
 export(etudeC)
 export(etudeE)

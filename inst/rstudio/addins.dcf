@@ -7,3 +7,8 @@ Name: new_learnr_etude
 Description: Create a new etude set up for learnr code boxes
 Binding: new_etude_learnr
 Interactive: true
+
+Name: clean_acroscore
+Description: Translates from an Acroscore style answer to an etude-style answr
+Binding: clean_acroscore
+Interactive: true

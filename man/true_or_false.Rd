@@ -2,6 +2,7 @@
 % Please edit documentation in R/multiple_choice.R
 \name{true_or_false}
 \alias{true_or_false}
+\alias{choose_one}
 \title{Shortcuts for fixed-choice questions}
 \usage{
 true_or_false(
@@ -12,6 +13,18 @@ true_or_false(
   points = NA,
   allow_retry = TRUE,
   show_answers = are_answers_on(),
+  is_learnr = "learnr" \%in\% loadedNamespaces()
+)
+
+choose_one(
+  prompt = "First consonant?",
+  choices = list(a = "No, it's not", `+b+` = "Right as rain"),
+  inline = TRUE,
+  points = NA,
+  show_answers = are_answers_on(),
+  ...,
+  random_answer_order = TRUE,
+  allow_retry = TRUE,
   is_learnr = "learnr" \%in\% loadedNamespaces()
 )
 }

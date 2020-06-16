@@ -10,7 +10,9 @@ new_etude_learnr <- function(directory = ".") {
 #' @rdname new_etude_template
 new_etude <- function(directory = ".",
                       learnr = FALSE) {
-  # is there an Exercises directory?
+  # Does the directory exist
+  if (!(grepl("/$", directory) || directory == "." || directory == ".."))
+    stop("Directory name must terminate in a forward slash /.")
   tmp <- list.dirs(path = directory)
   if (length(tmp) == 0)
     stop("No directory <", directory, "> in which to create the file.")
@@ -66,6 +68,14 @@ get_doc_ID <- function(contents) {
     )
   }
   id
+}
+
+clean_acroscore <- function() {
+  context <- rstudioapi::getActiveDocumentContext()
+  where <- rstudioapi::primary_selection(context)
+  rstudioapi::insertText(where$range,
+                         do_clean_acroscore(where$text),
+                         context$id)
 }
 
 new_chunk_id <- function(contents, doc_id, type = "-Q") {

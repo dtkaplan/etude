@@ -4,7 +4,10 @@
 \alias{essay_response}
 \title{Custom learnr question types}
 \usage{
-essay_response(prompt = "Your answer here ...")
+essay_response(
+  prompt = "Your answer here ...",
+  is_learnr = "learnr" \%in\% loadedNamespaces()
+)
 }
 \description{
 Essay box
