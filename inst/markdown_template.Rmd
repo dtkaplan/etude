@@ -1,6 +1,7 @@
 ---
 chapter: "none yet"
 author: "XXAUTHORXX"
+difficulty: "XX"
 date: 
 version: 0.1
 tags: [first, second, third]

@@ -1,6 +1,6 @@
 #' Include multiple etude exercises
 #'
-#' @param spec: A data frame with one row for
+#' @param spec A data frame with one row for
 #' each exercise to be inclued in the parent document. The variables
 #' must be named `exercise`, `answers`, `documentation`, `package`, and `name`.
 #' (Any additional variables will simply be ignored by `etude_list`.)

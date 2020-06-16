@@ -2,6 +2,7 @@
 chapter: "none yet"
 title: "Title for XXAXX"
 author: "XXAUTHORXX"
+difficulty: "XX"
 output: learnr::tutorial
 tutorial:
   id: "XXAXX"

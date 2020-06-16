@@ -120,7 +120,7 @@ question_for_markup <- function(prompt = "What?",
   }
 
   if (inline) {
-    answers <- paste(paste(prelims, texts, messages), collapse = "   ")
+    answers <- paste(paste(prelims, texts, messages), collapse = "...")
   } else {
     answers <- paste("-", prelims, texts, messages, "     ")
   }

@@ -1,21 +1,38 @@
 Package: etude
 Type: Package
 Title: Utilities for Handling Textbook Exercises with Knitr
-Version: 0.3.0
+Version: 0.3.0.9001
 Author: Daniel Kaplan
+Authors@R: c(
+    person("Daniel", "Kaplan", email = "kaplan@macalester.edu", 
+    role = c("aut", "cre")),
+    person("Ben", "Baumer", role = "ctb"),
+    person("Jessica", "Yu", role = "ctb")
+    )
 Maintainer: Daniel Kaplan <kaplan@macalester.edu>
 Description: Provides a standard format for exercises and utilities for creating new files in that format, organizing them, and including them in knitr documents such as bookdown or blogdown.
 License: All rights reserved.
 Encoding: UTF-8
 LazyData: true
-Imports: 
+Imports:
+    glue,
+    knitr,
+    learnr,
+    shiny,
     whoami,
     rstudioapi
 Suggests: 
-    knitr,
     rmarkdown,
     yaml,
-    dplyr
+    dplyr,
+    ggformula,
+    kableExtra,
+    mosaic,
+    mosaicData,
+    mosaicModel,
+    NHANES,
+    SDSdata
+Remotes: dtkaplan/SDSdata
 VignetteBuilder: knitr
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)

@@ -1,10 +1,13 @@
 #' Addin  to make a new etude exercise
 #'
 #' @export
+#' @rdname new_etude_template
+#' @param directory Path to the directory where the files go
 new_etude_learnr <- function(directory = ".") {
   new_etude(directory = directory, learnr = TRUE)
 }
 #' @export
+#' @rdname new_etude_template
 new_etude <- function(directory = ".",
                       learnr = FALSE) {
   # Does the directory exist
@@ -57,7 +60,7 @@ insertQ <- function(type = "-Q") {
 
 #' Get the id of the document
 get_doc_ID <- function(contents) {
-  id <- paste0("document_", as.hexmode(floor(runif(1, 1, 16^7))))
+  id <- paste0("document_", as.hexmode(floor(stats::runif(1, 1, 16^7))))
   id_line_number <- which(grepl("^id:", contents))
   if (length(id_line_number) > 0) {
     id <- gsub(" +", "",
