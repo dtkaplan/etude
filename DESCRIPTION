@@ -3,6 +3,12 @@ Type: Package
 Title: Utilities for Handling Textbook Exercises with Knitr
 Version: 0.3.0.9001
 Author: Daniel Kaplan
+Authors@R: c(
+    person("Daniel", "Kaplan", email = "kaplan@macalester.edu", 
+    role = c("aut", "cre")),
+    person("Ben", "Baumer", role = "ctb"),
+    person("Jessica", "Yim", role = "ctb")
+    )
 Maintainer: Daniel Kaplan <kaplan@macalester.edu>
 Description: Provides a standard format for exercises and utilities for creating new files in that format, organizing them, and including them in knitr documents such as bookdown or blogdown.
 License: All rights reserved.
