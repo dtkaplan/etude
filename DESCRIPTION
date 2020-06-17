@@ -23,16 +23,7 @@ Imports:
     rstudioapi
 Suggests: 
     rmarkdown,
-    yaml,
-    dplyr,
-    ggformula,
-    kableExtra,
-    mosaic,
-    mosaicData,
-    mosaicModel,
-    NHANES,
-    SDSdata
-Remotes: dtkaplan/SDSdata
+    yaml
 VignetteBuilder: knitr
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
