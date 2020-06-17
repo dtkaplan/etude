@@ -13,7 +13,6 @@ id: ant-feel-magnet
 ---
 
 ```{r ant-feel-magnet-setup, include = FALSE}
-SDSdata::sds_setup()
 library(etude)
 library(learnr)
 library(gradethis)
@@ -24,7 +23,7 @@ learnr::tutorial_options(exercise.timelimit = 60,
                  exercise.checker = gradethis::grade_learnr)
 ```
 
-```{r}
+```{r echo=FALSE}
 submitr::login_controls()
 ```
 
@@ -51,7 +50,8 @@ etude::etudeQinline()
 etude::choose_one(
   prompt = "Which  is a vowel?",
   c("+A+", "B", "C"),
-  random_answer_order = FALSE
+  random_answer_order = FALSE,
+  inline = FALSE
 )
 ```
 
@@ -63,7 +63,8 @@ etude::choose_one(
   list("+A+" = "The other vowels are E, I, O, U, and sometimes Y.", 
        "B" = "This is a consonant, not a vowel", 
        "ל" = "We're restricting things to the English alphabet. In any event, this Hebrew letter is not a vowel. It corresponds to the sound \"L\"."),
-  random_answer_order = FALSE
+  random_answer_order = FALSE,
+  inline = FALSE
 )
 ```
 
