@@ -53,8 +53,8 @@ true_or_false <-
       ifelse(right_answer, message_right, message_wrong),
       ifelse(right_answer, message_wrong, message_right))
 
-    if (right_answer) names(choices) = c("+Right+", "Wrong")
-    else  names(choices) = c("Right", "+Wrong+")
+    if (right_answer) names(choices) = c("+True+", "False")
+    else  names(choices) = c("True", "+False+")
 
     printfun(prompt = prompt,
              choices,

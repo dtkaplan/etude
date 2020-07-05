@@ -12,7 +12,7 @@ tags: [first, second, third]
 id: ant-feel-magnet
 ---
 
-```{r ant-feel-magnet-setup, include = FALSE}
+```{r ant-feel-magnet-setup, context="server", include = FALSE}
 library(etude)
 library(learnr)
 library(gradethis)
@@ -51,7 +51,7 @@ etude::choose_one(
   prompt = "Which  is a vowel?",
   c("+A+", "B", "C"),
   random_answer_order = FALSE,
-  inline = FALSE
+  inline = TRUE
 )
 ```
 
@@ -64,7 +64,7 @@ etude::choose_one(
        "B" = "This is a consonant, not a vowel", 
        "ל" = "We're restricting things to the English alphabet. In any event, this Hebrew letter is not a vowel. It corresponds to the sound \"L\"."),
   random_answer_order = FALSE,
-  inline = FALSE
+  inline = TRUE
 )
 ```
 

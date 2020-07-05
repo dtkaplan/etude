@@ -12,3 +12,9 @@ Name: clean_acroscore
 Description: Translates from an Acroscore style answer to an etude-style answer (you can ignore this)
 Binding: clean_acroscore
 Interactive: true
+
+Name: add_codebox
+Description: Adds the chunks needed for a new learnr exercise
+Binding: etudeE
+Interactive: true
+

@@ -110,6 +110,8 @@ etudeC <- function() etude::insertQ("-C") # Chunk
 #' @export
 etudeQA <- function() etude::insertQ("-QA")
 #' @export
+etudeTF <- function() etude::insertQ("-TF")
+#' @export
 etudeQinline <- function() etude::insertQ("-Qinline")
 
 

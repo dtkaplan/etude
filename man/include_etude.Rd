@@ -4,13 +4,16 @@
 \alias{include_etude}
 \title{Inserting exercises into a document.}
 \usage{
-include_etude(fname, title)
+include_etude(fname, title, package = NULL)
 }
 \arguments{
-\item{fname}{The path name for the etude \code{.Rmd} file.}
+\item{fname}{The path name for the etude file. Include the filetype extension (e.g. \code{.Rmd}).}
 
 \item{title}{Character string containing the immediate header
 for the etude, e.g., \code{"Problem 17.3:"} or \code{"### Exer A\\n\\n"}}
+
+\item{package}{The name of the package (if etude file is provided by a package).
+This avoids having to call \code{system.file()}}
 }
 \description{
 Inserts an etude into a mother document
