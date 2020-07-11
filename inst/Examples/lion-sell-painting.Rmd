@@ -1,0 +1,17 @@
+---
+chapter: "none yet"
+author: "Danny Kaplan"
+difficulty: "XX"
+date: 2020-07-11 
+version: 0.1
+tags: [first, second, third]
+id: lion-sell-painting
+---
+
+```{r lion-sell-painting-default, include = FALSE}
+library(etude)
+```
+
+`r etude::exercise_title()`      Start content here.
+
+

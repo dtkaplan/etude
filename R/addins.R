@@ -44,8 +44,10 @@ insertQ <- function(type = "-Q") {
   contents <- this_doc$contents
   # figure out the document ID
   id <- get_doc_ID(contents)
+  cat("Doc ID is", id, "\n")
   # Get the next question number
   chunk_id <- new_chunk_id(contents, id, type)
+  cat("Chunk ID is", chunk_id, "\n")
   template_file <-
     system.file(glue::glue("template{type}.Rmd"),
                 package = "etude")
@@ -64,7 +66,7 @@ get_doc_ID <- function(contents) {
   id_line_number <- which(grepl("^id:", contents))
   if (length(id_line_number) > 0) {
     id <- gsub(" +", "",
-               gsub("^[id:| )]+(.*)$", "\\1", contents[id_line_number[1]])
+               gsub("^(id:| )+(.*)$", "\\2", contents[id_line_number[1]])
     )
   }
   id

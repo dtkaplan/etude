@@ -192,3 +192,9 @@ Do these exercises before class on Thursday:
 
 ````
 ````
+
+## Navigating
+
+IN DRAFT:
+
+- `include_etude()` now puts source file name as a tooltip in the `...` after the title.

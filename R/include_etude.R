@@ -10,13 +10,19 @@
 #'
 #' @export
 include_etude <- function(fname, title, package = NULL) {
-  if (!is.null(package)) fname <- system.file(fname, package=package)
+  tooltip <- glue::glue(
+    "<span title='{fname} in package {ifelse(!is.null(package), package, '')}'>...</span>")
+  if (!is.null(package)) {
+    fname <- system.file(fname, package=package)
+  }
 
   if (missing(title)) {
     warning("Using etude file name as title. See title= argument to include_etude()")
     title = paste("### Source file:",fname,"\n\n")
   }
-  assign(".the_title.", title, envir = etude:::title.env)
+  assign(".the_title.",
+         paste(title, tooltip),
+         envir = etude:::title.env)
 
   # return the knitted document
   knitr::knit_child(fname, envir = etude:::title.env)

@@ -102,13 +102,17 @@ question_for_markup <- function(prompt = "What?",
                           inline= TRUE,
                           points = NA,
                           show_answers = TRUE,
+                          chunk_name = knitr::opts_current$get()$label,
                           ...) {
   texts <- names(choices)
   messages <- unlist(choices)
   correct_ones <- which_are_correct(texts)
   texts <- clean_names(texts)
 
-  res <- paste0("**", prompt, "**     ")
+  res <-
+    sprintf("%s <span title = '%s'>...</span>",
+            prompt, chunk_name)
+
   if (!is.na(points)) res <- paste0(res, "(", points, "points)")
   res <- paste(res, "     \n")
   if (show_answers) {
@@ -137,7 +141,9 @@ question_for_learnr <- function(prompt = "What?",
                                 points = NA,
                                 show_answers = TRUE,
                                 random_answer_order = TRUE,
-                                allow_retry = TRUE) {
+                                allow_retry = TRUE,
+                                chunk_name = knitr::opts_current$get()$label
+) {
 
 
   if (is.character(choices)) {
@@ -175,7 +181,9 @@ question_for_learnr <- function(prompt = "What?",
   }
 
   arguments <- list(
-    text <- prompt,
+    text <-
+      sprintf("%s <span title = '%s'>...</span>",
+              prompt, chunk_name),
     random_answer_order = random_answer_order,
     allow_retry = allow_retry,
     type = qtype
