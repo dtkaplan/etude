@@ -4,7 +4,7 @@
 # Setup code goes here
 "setup"
 ```
-
+<span title='BLOCK_NAME'>...</span>
 ```{r BLOCK_NAME, exercise=TRUE, exercise.cap="Sandbox", exercise.setup="BLOCK_NAME-setup", exercise.eval=FALSE, exercise.lines=2, exercise.completion=FALSE, exercise.startover=TRUE, exercise.diagnostics=TRUE}
 "code block"
 ```

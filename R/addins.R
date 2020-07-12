@@ -114,6 +114,8 @@ etudeQA <- function() etude::insertQ("-QA")
 #' @export
 etudeTF <- function() etude::insertQ("-TF")
 #' @export
+etudeEssay <- function() etude::insertQ("-Essay")
+#' @export
 etudeQinline <- function() etude::insertQ("-Qinline")
 
 

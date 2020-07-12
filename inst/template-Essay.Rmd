@@ -1,0 +1,8 @@
+```{r BLOCK_NAME, echo=FALSE}
+etude::essay_response(
+  prompt = "Prompt for essay"
+)
+```
+
+
+

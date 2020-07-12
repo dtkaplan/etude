@@ -6,7 +6,8 @@
 \usage{
 essay_response(
   prompt = "Your answer here ...",
-  is_learnr = "learnr" \%in\% loadedNamespaces()
+  is_learnr = "learnr" \%in\% loadedNamespaces(),
+  chunk_name = knitr::opts_current$get()$label
 )
 }
 \description{

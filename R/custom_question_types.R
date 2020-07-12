@@ -5,8 +5,12 @@
 #' @export
 essay_response <- function(
   prompt = "Your answer here ...",
-  is_learnr = "learnr" %in% loadedNamespaces()
+  is_learnr = "learnr" %in% loadedNamespaces(),
+  chunk_name = knitr::opts_current$get()$label
 ) {
+
+  prompt <- sprintf("%s <span title = '%s'>...</span>",
+                    prompt, chunk_name)
   if (is_learnr) {
   question(text = prompt,
            answer("", correct=TRUE),
