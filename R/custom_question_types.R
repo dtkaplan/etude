@@ -9,7 +9,8 @@ essay_response <- function(
   chunk_name = knitr::opts_current$get()$label
 ) {
 
-  prompt <- sprintf("%s <span title = '%s'>...</span>",
+  # Ending non-breaking space means  that it's an essay.
+  prompt <- sprintf("%s <span title = '%s'>...</span> ",
                     prompt, chunk_name)
   if (is_learnr) {
   question(text = prompt,

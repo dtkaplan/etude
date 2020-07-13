@@ -4,5 +4,3 @@ etude::essay_response(
 )
 ```
 
-
-
