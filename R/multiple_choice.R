@@ -116,10 +116,10 @@ question_for_markup <- function(prompt = "What?",
   if (!is.na(points)) res <- paste0(res, "(", points, "points)")
   res <- paste(res, "     \n")
   if (show_answers) {
-    prelims <- ifelse(correct_ones, "✔", "✗")
+    prelims <- ifelse(correct_ones, "v", "x")
     messages <- paste0("...*", messages, "*")
   } else {
-    prelims <- "⚀"
+    prelims <- "o"
     messages <- ""
   }
 
