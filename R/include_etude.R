@@ -7,9 +7,10 @@
 #' for the etude, e.g., `"Problem 17.3:"` or `"### Exer A\n\n"`
 #' @param package The name of the package (if etude file is provided by a package).
 #' This avoids having to call `system.file()`
+#' @param quiet Logical flag to control display of `knitr` messages.
 #'
 #' @export
-include_etude <- function(fname, title, package = NULL) {
+include_etude <- function(fname, title, package = NULL, quiet=FALSE) {
   tooltip <- glue::glue(
     "<span title='{fname} in package {ifelse(!is.null(package), package, '')}'>...</span>")
   if (!is.null(package)) {
@@ -25,7 +26,7 @@ include_etude <- function(fname, title, package = NULL) {
          envir = etude:::title.env)
 
   # return the knitted document
-  knitr::knit_child(fname, envir = etude:::title.env)
+  knitr::knit_child(fname, envir = etude:::title.env, quiet=quiet)
 }
 #' @export
 exercise_title <- function() {

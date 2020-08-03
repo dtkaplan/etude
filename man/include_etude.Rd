@@ -4,7 +4,7 @@
 \alias{include_etude}
 \title{Inserting exercises into a document.}
 \usage{
-include_etude(fname, title, package = NULL)
+include_etude(fname, title, package = NULL, quiet = FALSE)
 }
 \arguments{
 \item{fname}{The path name for the etude file. Include the filetype extension (e.g. \code{.Rmd}).}
@@ -14,6 +14,8 @@ for the etude, e.g., \code{"Problem 17.3:"} or \code{"### Exer A\\n\\n"}}
 
 \item{package}{The name of the package (if etude file is provided by a package).
 This avoids having to call \code{system.file()}}
+
+\item{quiet}{Logical flag to control display of \code{knitr} messages.}
 }
 \description{
 Inserts an etude into a mother document
